@@ -1,0 +1,14 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import url('https://fonts.cdnfonts.com/css/montserrat');
+
+:root {
+    --primary-font: 'Montserrat', sans-serif;;
+    --secondary-font: "Roboto",sans-serif;
+}
+
+body {
+    font-family: var(--primary-font);
+}
