@@ -13,7 +13,7 @@ function Navbar() {
   };
 
   return (
-    <div className="container  mx-auto  sticky top-0 z-10 p-4 bg-white">
+    <div className="container  mx-auto  sticky top-0 z-10 p-4 bg-transparent">
       <div className="flex items-center justify-between">
         <NavLink to="/">
           <img src={logo} alt="Logo" id="logo" />
@@ -23,7 +23,7 @@ function Navbar() {
             return (
               <NavLink
                 to={navigation.link}
-                className="nav-link font-medium"
+                className="nav-link font-medium text-white"
                 style={{ cursor: "pointer" }}
               >
                 {navigation.name}
@@ -31,7 +31,7 @@ function Navbar() {
             );
           })}
         </div>
-        <div className="flex items-center font-medium p-4 md:p-0 md:space-x-10 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+        <div className="flex items-center font-medium p-4 md:p-0 md:space-x-10 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-transparent">
           {/* <button
             type="button"
             data-collapse-toggle="navbar-search"
@@ -78,11 +78,11 @@ function Navbar() {
             <input
               type="text"
               id="search-navbar"
-              className="block w-full p-2 ps-10 text-sm text-gray-900 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="block w-full rounded-full p-2 ps-10 text-sm text-gray-900 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Search..."
             />
           </div>
-          <NavLink className="flex items-center ml-8 md:ml-0 space-x-2 py-2 md:px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0">
+          <NavLink className="flex items-center text-white ml-8 md:ml-0 space-x-2 py-2 md:px-3 rounded bg-transparent md:border-0 md:p-0">
             <BsCart3 className="cart-icon" />
             <div className="hidden md:inline-block">Cart</div>
           </NavLink>
@@ -151,7 +151,7 @@ function Navbar() {
               className="nav-link"
               style={{ cursor: "pointer" }}
             >
-              Contactmmmmmmmmmn
+              Contact
             </NavLink>
           </div>
         </div>

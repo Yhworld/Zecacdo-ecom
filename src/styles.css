@@ -3,10 +3,12 @@
 @import 'tailwindcss/utilities';
 
 @import url('https://fonts.cdnfonts.com/css/montserrat');
+@import url('https://fonts.cdnfonts.com/css/copperplate-gothic-std');
 
 :root {
     --primary-font: 'Montserrat', sans-serif;;
     --secondary-font: "Roboto",sans-serif;
+    --hero-font: 'Copperplate Gothic Std', sans-serif;
 }
 
 body {
