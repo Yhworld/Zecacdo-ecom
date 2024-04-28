@@ -1,0 +1,23 @@
+
+#auth {
+    height: 100vh; 
+  }
+  
+  #login-form {
+    padding: 32px 48px 32px 48px;
+    border: solid 1px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    margin: auto;
+    /* max-width: 400px; */
+  }
+  
+  /* Responsive adjustments for smaller screens */
+  @media (max-width: 768px) {
+    #login-form {
+      max-width: 320px;
+      padding: 16px;
+      border:none
+    }
+  }
+  
