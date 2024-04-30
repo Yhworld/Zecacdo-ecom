@@ -13,6 +13,12 @@
     box-shadow: 0 3px 6px 0 rgba(0,0,0,0.2), 0 2px 2px 0 rgba(0,0,0,0.19);
 }
 
+@media screen and (max-width: 1024px) {
+  #logo {
+    max-width: 120px;
+  }
+  }
+
 
 @media screen and (max-width: 768px) {
 
@@ -42,7 +48,7 @@
     left: 0;
     width: 29px;
     height: 2px;
-    background: white;
+    /* background: black; */
     transform: rotate(0);
     transition: all 0.5s;
   }
