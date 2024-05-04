@@ -58,7 +58,7 @@ function Signup() {
                          className="pb-1 text-xs tracking-wider"
                        >Password</label>
                        <input
-                         type="email"
+                         type="password"
                          id="email"
                          placeholder="Your Password"
                          className="mb-2 w-full rounded-sm border border-gray-600 py-2 pl-2 pr-16 sm:mb-0"
