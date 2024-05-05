@@ -4,11 +4,15 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
+    screens:{
+      sm:"480px",
+      md:"768px",
+      lg:"1020px",
+      xl:"1440px"
+    },
     extend: {
       colors: {
-        brightGreen: 'hsl(157, 49%, 49%)',
-        btbBrown: '#E6D8BD'
-
+        brown: 'hsla(21, 53%, 26%, 1)',
       },
     },
   },

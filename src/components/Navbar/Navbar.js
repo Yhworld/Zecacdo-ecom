@@ -17,11 +17,10 @@ function Navbar() {
   };
 
   return (
-    <div className={`sticky top-0 z-10 p-4 ${isHomepage ? 'bg-transparent' : 'bg-white'}`}>
+    <div id="topbar" className={`sticky top-0 z-10 p-4 ${isHomepage ? 'bg-transparent' : 'bg-white'}`}>
       <div className="max-w-screen-xl flex items-center justify-between md:mx-auto p-4">
         <NavLink to="/">
         <Logo id="logo" fill={isHomepage ? '#fff' : '#65371F'}/>
-          {/* <img src={logo} alt="Logo" id="logo" /> */}
         </NavLink>
         <div className="hidden space-x-8 lg:flex">
           {data.map((navigation) => {

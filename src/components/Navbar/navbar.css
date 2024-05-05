@@ -3,6 +3,13 @@
     animation: slide-in 1.8s forwards;
 }
 
+#topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
 .cart-icon{
     font-size: 1.7rem;
     font-weight: 700;
