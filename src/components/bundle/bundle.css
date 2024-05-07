@@ -1,0 +1,13 @@
+#bundle-black, #bundle-white {
+    background-image: url('../../../public/image4.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%; 
+    height: 50vh;
+    /* width: 50%; */
+    /* height: 600px; */
+}
+
+#bundle-white {
+    background-image: url('../../../public/image5.png');
+}
