@@ -26,12 +26,12 @@ function Navbar() {
           {data.map((navigation) => {
             return (
               <NavLink
-                to={navigation.link}
-                className={`nav-link font-medium md:text-sm ${isHomepage ? 'text-white' : 'text-black'}`}
-                style={{ cursor: "pointer" }}
-              >
-                {navigation.name}
-              </NavLink>
+              to={navigation.link}
+              className={`nav-link font-medium md:text-sm ${isHomepage ? 'text-white homepage' : 'text-black'}`}
+              style={{ cursor: "pointer" }}
+            >
+              {navigation.name}
+            </NavLink>
             );
           })}
         </div>
