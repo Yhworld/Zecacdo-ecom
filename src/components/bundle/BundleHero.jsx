@@ -7,7 +7,7 @@ function BundleHero() {
       <div className="flex flex-col md:flex-row justify-between items-center relative mb-28 mt-36">
         <div
           id="bundle-black"
-          className="text-white flex flex-col justify-end pl-16 pb-12 pt-28"
+          className="text-white flex flex-col justify-end pl-16 pb-12 "
         >
           <p className="text-sm">JUST FOR YOU</p>
           <h2 className="font-bold text-3xl pt-2">

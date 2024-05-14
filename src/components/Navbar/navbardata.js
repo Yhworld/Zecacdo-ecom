@@ -1,7 +1,7 @@
 const data = [
     {
         name:"SHOP",
-        link: "home"
+        link: "shop"
     },
     {
         name:"ABOUT US",
