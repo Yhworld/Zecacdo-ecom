@@ -1,0 +1,8 @@
+#bgshop{
+    background-image: url('/public/image1.jpg');
+    height: 15vw;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 10% 90%;
+    /* background-position: center bottom; */
+}
