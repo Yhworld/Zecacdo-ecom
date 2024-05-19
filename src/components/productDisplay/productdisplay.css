@@ -1,0 +1,14 @@
+#product-title {
+    font-family: var(--hero-font);
+}
+
+.price {
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out; 
+  }
+  
+  .price-change {
+    transform: scale(1.1); 
+    opacity: 1; 
+  }
+  
+  
