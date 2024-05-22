@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { NavLink, useLocation } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/logo/zecado.svg'
 import "./navbar.css";
 import { BsCart3 } from "react-icons/bs";
 import data from "./navbardata";
+import { useSelector } from 'react-redux';
 
 function Navbar() {
+  
+  const navigate = useNavigate();
   const [isOpen, setIsMenuOpen] = useState(false);
 
   const location = useLocation();
@@ -15,6 +19,16 @@ function Navbar() {
   const toggleMenu = () => {
     setIsMenuOpen(!isOpen);
   };
+
+  const cart = useSelector((state) => state.cart.cart)
+
+const getTotalQuantity = () => {
+  let total = 0
+  cart.forEach(item => {
+    total += item.quantity
+  })
+  return total
+}
 
   return (
     <div id="topbar" className={`${isHomepage ? 'absolute' : 'sticky'} top-0 z-10 p-4 ${isHomepage ? 'bg-transparent' : 'bg-white'}`}>
@@ -86,10 +100,10 @@ function Navbar() {
               placeholder="Search..."
             />
           </div>
-          <NavLink  className={`flex items-center ${isHomepage ? 'text-white' : 'text-slate-600'} md:ml-0 space-x-2 py-2 lg:px-3 md:px-12 rounded md:border-0 md:p-0`}>
-            <BsCart3 className="cart-icon" />
-            <div className="hidden lg:inline-block">Cart</div>
-          </NavLink>
+          <div onClick={() => navigate('/cart')} className={`flex items-center ${isHomepage ? 'text-white' : 'text-slate-600'} md:ml-0 space-x-2 py-2 lg:px-3 md:px-12 rounded md:border-0 md:p-0`}>
+            <BsCart3 className="cart-icon"  />
+            <div className="hidden lg:inline-block">Cart {getTotalQuantity() || 0}</div>
+          </div>
           <NavLink
             to="/contact"
             id="btnRegister"

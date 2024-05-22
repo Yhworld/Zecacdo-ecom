@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { fetchProducts } from '../path/to/your/store'; 
+import { fetchProducts } from '../../slices/ProductSlice.js'; // Adjust the import path as needed
 
 import Item from '../item/Item.jsx'; 
 import './feature.css';
@@ -10,10 +10,10 @@ function Feature() {
   const loading = useSelector(state => state.products.loading);
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   // Fetch products when component mounts
-  //   dispatch(fetchProducts());
-  // }, [dispatch]);
+  useEffect(() => {
+    // Fetch products when component mounts
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   return (
     <div className='mx-auto container mt-20 mb-24'>
@@ -24,14 +24,19 @@ function Feature() {
           {[...Array(3)].map((_, index) => (
             <div key={index} className="animate-pulse rounded-lg p-4">
               <div className="w-full h-80 bg-gray-200 mb-4"></div>
-              {/* <div className="h-2 bg-brown mb-2"></div> */}
             </div>
           ))}
         </div>
       ) : (
         <div className="flex flex-col md:flex-row justify-between md:items-center">
           {products.map(product => (
-            <Item key={product.id} id={product.id} image={product.image} name={product.title} price={product.price} />
+            <Item
+              key={product.id}
+              id={product.id}
+              image={product.imageUrl}  // Ensure imageUrl is passed correctly
+              name={product.name}       // Ensure name is passed correctly
+              price={product.price}     // Ensure price is passed correctly
+            />
           ))}
         </div>
       )}

@@ -119,7 +119,7 @@ const ShopFilter = () => {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
           {filteredProducts.map(product => (
-            <Item key={product.id} id={product.id} image={product.image} name={product.title} price={product.price} />
+            <Item key={product.id} id={product.id} image={product.imageUrl} name={product.name} price={product.price} />
           ))}
         </div>
       )}

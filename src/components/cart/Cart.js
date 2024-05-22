@@ -7,8 +7,8 @@ function Cart() {
 
   return (
     <div className="cart__left p-4">
-      <div>
-        <h3 className="text-2xl font-bold mb-4">Shopping Cart</h3>
+      <div className='container mx-auto'>
+        <h3 className="text-2xl font-bold mb-4">Your Cart</h3>
         {cart.length === 0 ? (
           <div className="text-center text-gray-500">
             Your cart is currently empty.
