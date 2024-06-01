@@ -1,0 +1,15 @@
+.item-container {
+    flex: 1;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  
+  .product-image {
+    width: 100%;
+    max-width: 200px; /* Adjust the max width as needed */
+    max-height: 200px; /* Adjust the max height as needed */
+    object-fit: cover; /* Ensures the image covers the box without distortion */
+    border-radius: 8px; /* Optional: adds rounded corners */
+    margin-bottom: 10px; /* Adds some space below the image */
+  }
+  
