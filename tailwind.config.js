@@ -13,6 +13,7 @@ module.exports = {
     extend: {
       colors: {
         brown: 'hsla(21, 53%, 26%, 1)',
+        zpink: 'hsla(28, 48%, 94%, 1)',
       },
     },
   },
