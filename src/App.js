@@ -11,18 +11,20 @@ import Cart from './components/cart/Cart';
 
 function App() {
   return (
-    <>  
-     <Navbar />
-     <Routes>
+    <div className="app-container">  
+      <Navbar />
+      <div className="content">
+        <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Signin />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/product/:id" element={<Product />} />
-    </Routes>
-    <Footer />
-    </>
+        </Routes>
+      </div>
+      <Footer />
+    </div>
   );
 }
 
