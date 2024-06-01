@@ -106,4 +106,4 @@ const ProductDisplay = (props) => {
     </div>
   );
 };
-export default ProductDisplay;
+export default ProductDisplay; 
