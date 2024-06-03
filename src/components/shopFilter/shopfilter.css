@@ -1,3 +1,23 @@
 #filter-title {
     font-family: var(--hero-font);
 }
+
+.filter-container {
+    max-height: calc(100vh - 200px); /* Dynamic max height based on viewport height */
+    overflow-y: auto;
+    scrollbar-width: thin; /* Firefox */
+  }
+  
+  .filter-container::-webkit-scrollbar {
+    width: 8px; /* Width of the scrollbar */
+  }
+  
+  .filter-container::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+  }
+  
+  .filter-container::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the scrollbar thumb on hover */
+  }
+  
