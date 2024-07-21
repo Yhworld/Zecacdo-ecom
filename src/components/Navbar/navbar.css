@@ -1,5 +1,5 @@
 #logo {
-  max-width: 150px;
+  max-width: 9rem;
   animation: slide-in 1.8s forwards;
 }
 
@@ -103,7 +103,6 @@
   left: 0;
   width: 29px;
   height: 2px;
-  /* background-color: #fff;  */
   transition: all 0.5s;
 }
 

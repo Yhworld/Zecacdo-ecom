@@ -46,7 +46,7 @@ function Navbar() {
             </NavLink>
           ))}
         </div>
-        <div className="flex items-center font-medium p-4 md:p-0 md:space-x-10 lg:space-x-4 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-transparent">
+        <div className="flex items-center font-medium p-4 md:p-0 md:space-x-10 lg:space-x-6 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 bg-transparent">
           <div className="relative hidden md:block">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
               <svg
@@ -75,9 +75,9 @@ function Navbar() {
           </div>
           <div
             onClick={() => navigate('/cart')}
-            className={`relative flex items-center ${isHomepage ? 'text-white' : 'text-slate-600'} md:ml-0 py-2 lg:px-3 md:px-12 rounded md:border-0 md:p-0 cursor-pointer transition-colors duration-300 hover:bg-gray-200`}
+            className={`relative flex items-center ${isHomepage ? 'text-white' : 'text-slate-600'} md:ml-0 py-2 lg:px-3 md:px-3 px-2 rounded md:border-0 md:p-0`}
           >
-            <BsCart3 className="cart-icon text-2xl" />
+            <BsCart3 className={`cart-icon text-2xl cursor-pointer transition-colors duration-300 ${isHomepage ? `hover:text-gray-200`: `hover:text-gray-300`} `}/>
             {getTotalQuantity() > 0 && (
               <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-xs rounded-full px-1">
                 {getTotalQuantity()}

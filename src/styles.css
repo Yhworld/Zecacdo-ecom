@@ -4,11 +4,14 @@
 
 @import url('https://fonts.cdnfonts.com/css/montserrat');
 @import url('https://fonts.cdnfonts.com/css/copperplate-gothic-std');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 :root {
     --primary-font: 'Montserrat', sans-serif;;
     --secondary-font: "Roboto",sans-serif;
     --hero-font: 'Copperplate Gothic Std', sans-serif;
+    --hero-two: "Playfair Display", serif;
+    --primary-color: #65371F;
 }
 
 body {

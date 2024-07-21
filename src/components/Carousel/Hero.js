@@ -38,7 +38,7 @@ function Hero() {
     <br/>
     <div id="hero-text" className="md:text-5xl text-2xl">
       <p>CRAFTING FOR THE DISCERNING</p>
-      <p>MAN:TIMELESS FRAGRANCES</p>
+      <p>TIMELESS FRAGRANCES</p>
       <p>FOR EVERY OCCASION</p>
     </div>
     <div className="cta-btn">

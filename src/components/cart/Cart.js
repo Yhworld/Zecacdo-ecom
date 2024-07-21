@@ -1,11 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import CartItem from '../cartItem/CartItem';
 import './cart.css';
 import Breadcrumb from '../breadcrumbs/Breadcrumb';
 
 function Cart() {
   const cart = useSelector(state => state.cart.cart); // Ensure this matches your state structure
+  const navigate = useNavigate();
 
   const pathMapping = {
     '/cart': 'cart',
@@ -20,6 +22,14 @@ function Cart() {
     });
     totalPrice = parseFloat(totalPrice.toFixed(2)); // Round to two decimal places and convert back to number
     return { totalPrice, totalQuantity };
+  };
+
+  const handleCheckout = () => {
+    if (cart.length > 0) {
+      navigate('/checkout');
+    } else {
+      alert('Your cart is empty. Please add items to your cart before proceeding to checkout.');
+    }
   };
 
   return (
@@ -52,7 +62,7 @@ function Cart() {
             <p className="text-sm w-3/4">
               *Shipping & taxes calculated at checkout
             </p>
-            <button className="bg-brown text-white py-4 w-full text-xs font-semibold">
+            <button onClick={handleCheckout} className="bg-brown text-white py-4 w-full text-xs font-semibold">
               Proceed to checkout
             </button>
           </div>
