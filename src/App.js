@@ -9,6 +9,7 @@ import Product from './components/product/product';
 import Shop from './pages/Shop';
 import Cart from './components/cart/Cart';
 import Checkout from './components/checkout/Checkout';
+import OrderConfirmation from './components/order/OrderConfirmation';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/register" element={<Signup />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/product/:id" element={<Product />} />
+          <Route path="/orderid/:orderId" element={<OrderConfirmation />} />
         </Routes>
       </div>
       <Footer />

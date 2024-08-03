@@ -1,6 +1,8 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useDispatch } from 'react-redux';
+import { setContactInfo } from '../../slices/contactInfoSlice';
 
 const ContactInformation = ({ onNext, initialData }) => {
   const formik = useFormik({
@@ -21,7 +23,6 @@ const ContactInformation = ({ onNext, initialData }) => {
 
   return (
     <div className="contact-info">
-      {/* <h3>Contact Information</h3> */}
       <form className="contact-form" onSubmit={formik.handleSubmit}>
         <div className="form-group">
           <label>First Name</label>

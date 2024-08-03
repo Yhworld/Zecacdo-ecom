@@ -5,8 +5,13 @@ import * as Yup from 'yup';
 import debounce from 'lodash/debounce';
 import 'react-international-phone/style.css';
 import './delivery.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setDeliveryInfo } from '../../slices/deliveryInfoSlice';
 
-const DeliveryInformation = ({ onNext, onPrevious, initialData }) => {
+const DeliveryInformation = ({ onNext, onPrevious }) => {
+  const dispatch = useDispatch();
+  const initialData = useSelector((state) => state.deliveryInfo);
+
   const [loading, setLoading] = useState(false);
   const [countries, setCountries] = useState([]);
   const [phone, setPhone] = useState(initialData?.phone || '');
@@ -48,7 +53,8 @@ const DeliveryInformation = ({ onNext, onPrevious, initialData }) => {
       phone: Yup.string().required('Required')
     }),
     onSubmit: (values) => {
-      onNext({ type: 'deliveryInfo', info: values });
+      dispatch(setDeliveryInfo(values));
+      onNext();
     },
   });
 

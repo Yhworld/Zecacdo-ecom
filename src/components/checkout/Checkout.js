@@ -4,23 +4,37 @@ import { useNavigate } from 'react-router-dom';
 import ContactInformation from '../contactinfo/ContactInformation';
 import DeliveryInformation from '../deliveryinfo/DeliveryInfo';
 import PaymentInformation from '../paymentinfo/PaymentInfo';
-import './checkout.css'; // Ensure you have relevant styles
-import { clearCart } from '../../slices/CartSlice'; // Assuming you have a cartSlice to manage cart state
+import './checkout.css';
+import { clearCart } from '../../slices/CartSlice';
+import { submitOrder } from '../../slices/orderSlice';
+import { submitCustomer } from '../../slices/customerSlice';
+import { setContactInfo } from '../../slices/contactInfoSlice';
+import { setDeliveryInfo } from '../../slices/deliveryInfoSlice';
+import { setPaymentInfo } from '../../slices/paymentInfoSlice';
 
 const Checkout = () => {
-  const cart = useSelector(state => state.cart.cart); // Assuming cart state structure
+  const cart = useSelector((state) => state.cart.cart);
+  const order = useSelector((state) => state.order);
+  const customer = useSelector((state) => state.customer);
+  const contactInfo = useSelector((state) => state.contactInfo) || {};
+  const deliveryInfo = useSelector((state) => state.deliveryInfo) || {};
+  const paymentInfo = useSelector((state) => state.paymentInfo) || {};
+
+  const orderId = order ? order.id : null;
+  const orderStatus = order ? order.status : null;
+  const orderError = order ? order.error : null;
+  const customerStatus = customer ? customer.status : null;
+  const customerError = customer ? customer.error : null;
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [step, setStep] = useState(1);
+  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
+
   const totalItems = cart.length;
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    contactInfo: {},
-    deliveryInfo: {},
-    paymentInfo: {}
-  });
-  const [orderSuccess, setOrderSuccess] = useState(false);
 
   useEffect(() => {
     if (cart.length === 0 && !orderSuccess) {
@@ -28,8 +42,26 @@ const Checkout = () => {
     }
   }, [cart, navigate, orderSuccess]);
 
+  useEffect(() => {
+    if (orderStatus === 'succeeded') {
+      setOrderSuccess(true);
+      setTimeout(() => {
+        dispatch(clearCart());
+        navigate(`/orderid/${orderId}`, { state: { userDetails } });
+      }, 3000);
+    } else if (orderStatus === 'failed') {
+      console.error('Order submission failed:', orderError);
+    }
+  }, [orderStatus, orderId, dispatch, navigate, orderError, userDetails]);
+
   const handleNext = (data) => {
-    setFormData(prev => ({ ...prev, [data.type]: data.info }));
+    if (step === 1) {
+      dispatch(setContactInfo(data.contactInfo));
+    } else if (step === 2) {
+      dispatch(setDeliveryInfo(data.deliveryInfo));
+    } else if (step === 3) {
+      dispatch(setPaymentInfo(data.paymentInfo));
+    }
     setStep(step + 1);
   };
 
@@ -38,56 +70,108 @@ const Checkout = () => {
   };
 
   const handleSubmit = async () => {
-    const orderItems = cart.map(item => ({
-      product: { id: item.id },
-      quantity: item.quantity
-    }));
+    setLoading(true);
 
-    const orderData = {
-      order: {
-        orderNumber: "12345666", // You might want to generate this dynamically
-        status: "PENDING",
-        salesTax: 12.2, // Calculate this based on your logic
-        orderItem: orderItems
-      }
+    // Verify that all address fields are present
+    const address = {
+      stateCode: deliveryInfo.stateCode,
+      state: deliveryInfo.state,
+      city: deliveryInfo.city,
+      country: deliveryInfo.country,
+      postalCode: deliveryInfo.postalCode,
+      countryCode: deliveryInfo.countryCode,
+      latitude: deliveryInfo.latitude,
+      longitude: deliveryInfo.longitude,
+    };
+
+    // Check if address fields are properly populated
+    if (!address.stateCode || !address.state || !address.city || !address.country || !address.postalCode) {
+      console.error('Address fields are missing');
+      setLoading(false);
+      return;
+    }
+
+    const customerData = {
+      customer: {
+        email: contactInfo.email,
+        phoneNumber: contactInfo.phoneNumber,
+        address: [address],
+      },
     };
 
     try {
-      const response = await fetch('http://localhost:8080/rest/services/create_order/createOrder', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(orderData)
+      console.log('Submitting customer data:', customerData);
+      const customerResponse = await dispatch(submitCustomer(customerData)).unwrap();
+      console.log('Customer response:', customerResponse);
+
+      setUserDetails({
+        firstName: contactInfo.firstName,
+        email: contactInfo.email,
+        customerId: customerResponse.customer.id,
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log('Order submitted successfully:', result);
-        setOrderSuccess(true);
-        dispatch(clearCart());
-      } else {
-        console.error('Order submission failed');
-        // Handle order submission failure (e.g., show an error message)
-      }
+      const orderItems = cart.map((item) => ({
+        product: { id: item.id },
+        quantity: item.quantity,
+      }));
+
+      const orderData = {
+        order: {
+          status: 'PENDING',
+          salesTax: 12.2,
+          orderItem: orderItems,
+          customer: {
+            ...contactInfo,
+            address: [deliveryInfo],
+          },
+        },
+      };
+
+      console.log('Submitting order data:', orderData);
+      const orderResult = await dispatch(submitOrder(orderData)).unwrap();
+      console.log('Order result:', orderResult);
+
+      const linkCustomerToOrder = {
+        username: contactInfo.firstName,
+      };
+
+      await fetch(`http://localhost:8080/orders/${orderResult.id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(linkCustomerToOrder),
+      });
+
+      setLoading(false);
     } catch (error) {
-      console.error('Error submitting order:', error);
-      // Handle error during order submission (e.g., show an error message)
+      console.error('Submission failed:', error);
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        console.error('Response status:', error.response.status);
+        console.error('Response headers:', error.response.headers);
+      } else if (error.request) {
+        console.error('Request data:', error.request);
+      } else {
+        console.error('Error message:', error.message);
+      }
+      setLoading(false);
     }
   };
 
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <ContactInformation onNext={handleNext} initialData={formData.contactInfo} />;
+        return <ContactInformation onNext={handleNext} initialData={contactInfo} />;
       case 2:
-        return <DeliveryInformation onNext={handleNext} onPrevious={handlePrevious} initialData={formData.deliveryInfo} />;
+        return <DeliveryInformation onNext={handleNext} onPrevious={handlePrevious} initialData={deliveryInfo} />;
       case 3:
-        return <PaymentInformation onPrevious={handlePrevious} onNext={handleSubmit} initialData={formData.paymentInfo} />;
+        return <PaymentInformation onPrevious={handlePrevious} onNext={handleSubmit} initialData={paymentInfo} />;
       default:
-        return <ContactInformation onNext={handleNext} initialData={formData.contactInfo} />;
+        return <ContactInformation onNext={handleNext} />;
     }
   };
+
 
   return (
     <div className="max-w-screen-xl mx-auto container p-4">
@@ -106,14 +190,14 @@ const Checkout = () => {
         {orderSuccess ? (
           <div className="order-success-message">
             <h2>Thank you for your order!</h2>
-            <p>Your order number is 12345666. You will receive an email confirmation shortly.</p>
+            <p>Your order ID is {orderId}. You will receive an email confirmation shortly.</p>
             <button onClick={() => navigate('/')} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Continue Shopping</button>
           </div>
         ) : (
           <>
             {renderStep()}
             <div className="order-summary md:border border-gray-300 p-6">
-              {cart.map(item => (
+              {cart.map((item) => (
                 <div key={item.id} className="summary-item mb-4 border border-black p-2">
                   <img src={item.image} alt={item.name} className="w-24 h-24 mb-2" />
                   <div className="summary-item-details">

@@ -2,6 +2,8 @@
 import productReducer from "../slices/ProductSlice";
 import { cartReducer } from "../slices/CartSlice";
 import categoryReducer from "../slices/CategorySlice";
+import rootReducer from "../slices/rootReducer";
+import orderReducer from '../slices/orderSlice'
 
 // export const store = configureStore({
 //   reducer: {
@@ -37,6 +39,8 @@ export const store = configureStore({
      products: productReducer,
      cart: persistedReducer,
      categories: categoryReducer,
+     order: orderReducer,
+     rootReducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
