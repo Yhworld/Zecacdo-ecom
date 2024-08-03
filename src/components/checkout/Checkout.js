@@ -7,31 +7,18 @@ import PaymentInformation from '../paymentinfo/PaymentInfo';
 import './checkout.css';
 import { clearCart } from '../../slices/CartSlice';
 import { submitOrder } from '../../slices/orderSlice';
-import { submitCustomer } from '../../slices/customerSlice';
-import { setContactInfo } from '../../slices/contactInfoSlice';
-import { setDeliveryInfo } from '../../slices/deliveryInfoSlice';
-import { setPaymentInfo } from '../../slices/paymentInfoSlice';
 
 const Checkout = () => {
   const cart = useSelector((state) => state.cart.cart);
   const order = useSelector((state) => state.order);
-  const customer = useSelector((state) => state.customer);
-  const contactInfo = useSelector((state) => state.contactInfo) || {};
-  const deliveryInfo = useSelector((state) => state.deliveryInfo) || {};
-  const paymentInfo = useSelector((state) => state.paymentInfo) || {};
-
-  const orderId = order ? order.id : null;
-  const orderStatus = order ? order.status : null;
-  const orderError = order ? order.error : null;
-  const customerStatus = customer ? customer.status : null;
-  const customerError = customer ? customer.error : null;
+  const orderId = order?.id;
+  const orderStatus = order?.status;
+  const orderError = order?.error;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [step, setStep] = useState(1);
   const [orderSuccess, setOrderSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [userDetails, setUserDetails] = useState({});
 
   const totalItems = cart.length;
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
@@ -45,23 +32,17 @@ const Checkout = () => {
   useEffect(() => {
     if (orderStatus === 'succeeded') {
       setOrderSuccess(true);
+      console.log('Order succeeded with ID:', orderId); // Log order success and ID
       setTimeout(() => {
         dispatch(clearCart());
-        navigate(`/orderid/${orderId}`, { state: { userDetails } });
+        navigate(`/orderid/${orderId}`);
       }, 3000);
     } else if (orderStatus === 'failed') {
       console.error('Order submission failed:', orderError);
     }
-  }, [orderStatus, orderId, dispatch, navigate, orderError, userDetails]);
+  }, [orderStatus, orderId, dispatch, navigate, orderError]);
 
   const handleNext = (data) => {
-    if (step === 1) {
-      dispatch(setContactInfo(data.contactInfo));
-    } else if (step === 2) {
-      dispatch(setDeliveryInfo(data.deliveryInfo));
-    } else if (step === 3) {
-      dispatch(setPaymentInfo(data.paymentInfo));
-    }
     setStep(step + 1);
   };
 
@@ -69,109 +50,37 @@ const Checkout = () => {
     if (step > 1) setStep(step - 1);
   };
 
-  const handleSubmit = async () => {
-    setLoading(true);
+  const handleSubmit = () => {
+    console.log('Submitting order...');
+    const orderItems = cart.map((item) => ({
+      product: { id: item.id },
+      quantity: item.quantity,
+    }));
 
-    // Verify that all address fields are present
-    const address = {
-      stateCode: deliveryInfo.stateCode,
-      state: deliveryInfo.state,
-      city: deliveryInfo.city,
-      country: deliveryInfo.country,
-      postalCode: deliveryInfo.postalCode,
-      countryCode: deliveryInfo.countryCode,
-      latitude: deliveryInfo.latitude,
-      longitude: deliveryInfo.longitude,
-    };
-
-    // Check if address fields are properly populated
-    if (!address.stateCode || !address.state || !address.city || !address.country || !address.postalCode) {
-      console.error('Address fields are missing');
-      setLoading(false);
-      return;
-    }
-
-    const customerData = {
-      customer: {
-        email: contactInfo.email,
-        phoneNumber: contactInfo.phoneNumber,
-        address: [address],
+    const orderData = {
+      order: {
+        status: "PENDING",
+        salesTax: 12.2,
+        orderItem: orderItems,
       },
     };
 
-    try {
-      console.log('Submitting customer data:', customerData);
-      const customerResponse = await dispatch(submitCustomer(customerData)).unwrap();
-      console.log('Customer response:', customerResponse);
-
-      setUserDetails({
-        firstName: contactInfo.firstName,
-        email: contactInfo.email,
-        customerId: customerResponse.customer.id,
-      });
-
-      const orderItems = cart.map((item) => ({
-        product: { id: item.id },
-        quantity: item.quantity,
-      }));
-
-      const orderData = {
-        order: {
-          status: 'PENDING',
-          salesTax: 12.2,
-          orderItem: orderItems,
-          customer: {
-            ...contactInfo,
-            address: [deliveryInfo],
-          },
-        },
-      };
-
-      console.log('Submitting order data:', orderData);
-      const orderResult = await dispatch(submitOrder(orderData)).unwrap();
-      console.log('Order result:', orderResult);
-
-      const linkCustomerToOrder = {
-        username: contactInfo.firstName,
-      };
-
-      await fetch(`http://localhost:8080/orders/${orderResult.id}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(linkCustomerToOrder),
-      });
-
-      setLoading(false);
-    } catch (error) {
-      console.error('Submission failed:', error);
-      if (error.response) {
-        console.error('Response data:', error.response.data);
-        console.error('Response status:', error.response.status);
-        console.error('Response headers:', error.response.headers);
-      } else if (error.request) {
-        console.error('Request data:', error.request);
-      } else {
-        console.error('Error message:', error.message);
-      }
-      setLoading(false);
-    }
+    console.log('Order data being submitted:', orderData); // Log the order data being submitted
+    dispatch(submitOrder(orderData));
   };
 
   const renderStep = () => {
     switch (step) {
       case 1:
-        return <ContactInformation onNext={handleNext} initialData={contactInfo} />;
+        return <ContactInformation onNext={handleNext} />;
       case 2:
-        return <DeliveryInformation onNext={handleNext} onPrevious={handlePrevious} initialData={deliveryInfo} />;
+        return <DeliveryInformation onNext={handleNext} onPrevious={handlePrevious} />;
       case 3:
-        return <PaymentInformation onPrevious={handlePrevious} onNext={handleSubmit} initialData={paymentInfo} />;
+        return <PaymentInformation onPrevious={handlePrevious} onNext={handleSubmit} />;
       default:
         return <ContactInformation onNext={handleNext} />;
     }
   };
-
 
   return (
     <div className="max-w-screen-xl mx-auto container p-4">
