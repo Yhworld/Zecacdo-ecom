@@ -69,18 +69,18 @@ const Checkout = () => {
     dispatch(submitOrder(orderData));
   };
 
-  const renderStep = () => {
-    switch (step) {
-      case 1:
-        return <ContactInformation onNext={handleNext} />;
-      case 2:
-        return <DeliveryInformation onNext={handleNext} onPrevious={handlePrevious} />;
-      case 3:
-        return <PaymentInformation onPrevious={handlePrevious} onNext={handleSubmit} />;
-      default:
-        return <ContactInformation onNext={handleNext} />;
-    }
-  };
+  // const renderStep = () => {
+  //   switch (step) {
+  //     case 1:
+  //       return <ContactInformation onNext={handleNext} />;
+  //     case 2:
+  //       return <DeliveryInformation onNext={handleNext} onPrevious={handlePrevious} />;
+  //     case 3:
+  //       return <PaymentInformation onPrevious={handlePrevious} onNext={handleSubmit} />;
+  //     default:
+  //       return <ContactInformation onNext={handleNext} />;
+  //   }
+  // };
 
   return (
     <div className="max-w-screen-xl mx-auto container p-4">
@@ -88,13 +88,13 @@ const Checkout = () => {
         Home / Checkout
       </div>
       <h2>CHECKOUT</h2>
-      <div className="checkout-steps md:space-x-6 space-x-4">
+      {/* <div className="checkout-steps md:space-x-6 space-x-4">
         <span className={step === 1 ? 'active' : ''}>1. Contact Information</span>
         &gt;
         <span className={step === 2 ? 'active' : ''}>2. Delivery Information</span>
         &gt;
         <span className={step === 3 ? 'active' : ''}>3. Payment Information</span>
-      </div>
+      </div> */}
       <div className="great-box">
         {orderSuccess ? (
           <div className="order-success-message">
@@ -104,21 +104,32 @@ const Checkout = () => {
           </div>
         ) : (
           <>
-            {renderStep()}
+          <ContactInformation />
+            {/* {renderStep()} */}
             <div className="order-summary md:border border-gray-300 p-6">
+              <div className='sticky'>
               {cart.map((item) => (
-                <div key={item.id} className="summary-item mb-4 border border-black p-2">
-                  <img src={item.image} alt={item.name} className="w-24 h-24 mb-2" />
+                
+                <div key={item.id} className="summary-item mb-4">
+                  <div className='flex items-center space-x-14'>
+                  <div className='relative border border-grey-200'>
+                     <img src={item.image} alt={item.name} className="w-24 h-24 mt-2" />
+                     <span className="font-bold absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-black text-white text-xs rounded-full px-2">
+                    × {item.quantity}
+              </span>
+                  </div>
+                 
                   <div className="summary-item-details">
                     {item.title}
-                    <p>Qty: {item.quantity}</p>
+                    {/* <p>Qty: {item.quantity}</p> */}
+                  </div>
                   </div>
                   <div className="summary-item-price">
                     $ {item.price}
                   </div>
                 </div>
               ))}
-              <div className="summary-total">
+              <div className="summary-total pt-4">
                 <div className="total-items flex justify-between mb-2">
                   <span>Items [{totalItems}]</span>
                   <span>$ {totalPrice}</span>
@@ -127,10 +138,11 @@ const Checkout = () => {
                   <span>Shipping Fee</span>
                   <span>Enter shipping address</span>
                 </div>
-                <div className="order-total flex justify-between font-bold">
-                  <span>ORDER TOTAL:</span>
+                <div className="order-total flex justify-between font-semibold">
+                  <span>Total:</span>
                   <span>$ {totalPrice}</span>
                 </div>
+              </div>
               </div>
             </div>
           </>
