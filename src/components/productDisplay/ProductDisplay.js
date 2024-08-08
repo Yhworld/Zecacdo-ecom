@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addToCart, incrementQuantity, decrementQuantity } from '../../slices/CartSlice';
 import { PiHeartThin } from "react-icons/pi";
+import ImageGallery from 'react-image-gallery';
+import "react-image-gallery/styles/css/image-gallery.css";
 import "./productdisplay.css";
 
 const ProductDisplay = (props) => {
@@ -59,19 +61,35 @@ const ProductDisplay = (props) => {
 
   const totalPrice = (product.price * quantity).toFixed(2);
 
+  const images = [
+    {
+      original: product.imageUrl,
+      thumbnail: product.imageUrl,
+    },
+    {
+      original: product.imageUrl,
+      thumbnail:product.imageUrl,
+    },
+    {
+      original: product.imageUrl,
+      thumbnail: product.imageUrl,
+    },
+    // {
+    //   original: product.imageUrl,
+    //   thumbnail: product.imageUrl,
+    // }
+  ];
+
   return (
     <div className="mx-auto container mt-12 flex flex-col md:flex-row justify-between">
       <div className="flex flex-col items-center md:w-2/5">
-        <div id="main-img">
-          <img src={product.imageUrl} alt="mainimage" />
-        </div>
-        <div id="sub-images" className="flex w-20 md:w-28 items-center justify-center">
-          <img className="border border-black pt-4" src={`http://localhost:8080/rest/files?fileRef=${encodeURIComponent(product.imageUrl2)}`} alt="" />
-          <img src={`http://localhost:8080/rest/files?fileRef=${encodeURIComponent(product.imageUrl3)}`} alt="" />
-          <img src={`http://localhost:8080/rest/files?fileRef=${encodeURIComponent(product.imageUrl4)}`} alt="" />
-        </div>
+        <ImageGallery items={images}
+        showPlayButton={false} 
+        showFullscreenButton={false} 
+        showNav={false}
+        />
       </div>
-      <div id="product-listing" className="space-y-6 md:mr-4 md:w-1/2">
+      <div id="product-listing" className="space-y-6 p-4 md:p-4 md:w-1/2">
         <div className="flex justify-between items-center space-x-20">
           <h1 className="text-3xl font-medium" id="product-title">{product.name}</h1>
           <PiHeartThin className="text-2xl" />
@@ -106,4 +124,4 @@ const ProductDisplay = (props) => {
     </div>
   );
 };
-export default ProductDisplay; 
+export default ProductDisplay;
