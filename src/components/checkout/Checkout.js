@@ -22,7 +22,7 @@ const Checkout = () => {
 
   const totalItems = cart.length;
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-  const itemIds = cart.map(item => item.id); // Extract item IDs into an array
+  const items = cart.map(item => ({ id: item.id, quantity: item.quantity })); // Map to array of objects with id and quantity
 
   useEffect(() => {
     if (cart.length === 0 && !orderSuccess) {
@@ -55,7 +55,7 @@ const Checkout = () => {
   const handleSubmit = async () => {
     try {
       const payload = {
-        items: itemIds, // Send the array of item IDs
+        items, // Pass the array of item objects with id and quantity
         customerName: `${contactInfo.firstName} ${contactInfo.lastName}`,
         customerEmail: contactInfo.email,
       };
@@ -144,7 +144,7 @@ const Checkout = () => {
               <div className="checkout-payment">
                 <PaymentInformation
                   onPrevious={handlePrevious}
-                  initialData={{ ...contactInfo, items: itemIds }}
+                  initialData={{ ...contactInfo, items }} // Pass the structured items array
                 />
               </div>
             )}
