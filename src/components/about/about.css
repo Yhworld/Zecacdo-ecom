@@ -1,0 +1,40 @@
+
+#feature h2 {
+  font-family: var(--secondary-font);
+}
+
+#title {
+  max-width: 8rem;
+}
+
+.aboutimg2 {
+  max-width: 733px;
+  max-height: 415px;
+}
+
+h2 {
+  font-family: var(--primary-font);
+}
+
+h2 span {
+  color: #44bb89;
+  padding-left: 1rem;
+}
+
+#tally  {
+  color: #44bb89;
+}
+
+@media (max-width: 738px) {
+  .aboutimg2 {
+    max-width: 310px;
+    max-height: 300px;
+    
+  }
+}
+
+
+
+#aboutimg{
+    max-width: 680px;
+}

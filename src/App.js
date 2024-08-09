@@ -10,6 +10,8 @@ import Shop from './pages/Shop';
 import Cart from './components/cart/Cart';
 import Checkout from './components/checkout/Checkout';
 import OrderConfirmation from './components/order/OrderConfirmation';
+import About from './components/about/About';
+import PaymentInformation from './components/paymentinfo/PaymentInfo';
 
 function App() {
   return (
@@ -18,8 +20,10 @@ function App() {
       <div className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<About />} />
           <Route path="/login" element={<Signin />} />
           <Route path="/shop" element={<Shop />} />
+          {/* <Route path="/payment" element={<PaymentInformation />} /> */}
           <Route path="/cart" element={<Cart />} />
           <Route path="/register" element={<Signup />} />
           <Route path="/checkout" element={<Checkout />} />

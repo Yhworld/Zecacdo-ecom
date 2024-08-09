@@ -5,7 +5,7 @@ const data = [
     },
     {
         name:"ABOUT US",
-        link: "About"
+        link: "about"
     },
     {
         name:"CONTACT US",
