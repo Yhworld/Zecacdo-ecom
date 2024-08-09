@@ -5,14 +5,14 @@ import { withTimeout } from '../utils/Timeout'; // Adjust the path as needed
 const processImageUrl = (url) => {
   if (url.startsWith('fs://')) {
     const encodedFilePath = encodeURIComponent(url.substring(5));
-    return `http://localhost:8080/rest/files?fileRef=fs%3A%2F%2F${encodedFilePath}`;
+    return `${process.env.REACT_APP_API_BASE_URL}/rest/files?fileRef=fs%3A%2F%2F${encodedFilePath}`;
   }
   return url;
 };
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
   const response = await withTimeout(
-    axios.get('http://localhost:8080/rest/entities/Product?fetchPlan=product-fetch-plan'),
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/rest/entities/Product?fetchPlan=product-fetch-plan`),
     10000 // Set the timeout to 10 seconds
   );
   return response.data.map(product => ({
@@ -23,7 +23,7 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async ()
 
 export const fetchProductById = createAsyncThunk('products/fetchProductById', async (id) => {
   const response = await withTimeout(
-    axios.get(`http://localhost:8080/rest/entities/Product/${id}?fetchPlan=product-fetch-plan`),
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/rest/entities/Product/${id}?fetchPlan=product-fetch-plan`),
     10000 // Set the timeout to 10 seconds
   );
   return {
