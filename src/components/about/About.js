@@ -7,7 +7,7 @@ let aboutImg = require("../../assets/campaign-creators-gMsnXqILjp4-unsplash.jpg"
 function About() {
   return (
     <>
-    <div id="about" className="max-w-screen-xl container mx-auto p-4">
+    <div id="about" className="max-w-screen-xl container mx-auto p-12">
       <div className="flex flex-col lg:flex-row justify-between gap-8 mt-8">
         <div className="w-full lg:w-5/12 flex flex-col justify-center">
           <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">

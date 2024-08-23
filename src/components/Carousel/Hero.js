@@ -31,7 +31,7 @@ function Hero() {
           backgroundImage: `linear-gradient(rgba(12, 12, 12, 0.4) 21.84%, rgba(12, 12, 12, 0.1) 71.03%), url(${process.env.PUBLIC_URL + imagePaths[current]})`
         }}
       >
-  <div id="hero-container" className="max-w-screen-xl flex flex-col mx-auto container text-white pt-48 pl-6">
+  <div id="hero-container" className="max-w-screen-xl flex flex-col mx-auto container text-white pt-48 pl-10">
     <div>
       SCENTS THAT COMMAND ATTENTION
     </div>

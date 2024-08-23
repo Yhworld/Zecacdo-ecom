@@ -81,7 +81,7 @@ const Checkout = () => {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto container p-4">
+    <div className="max-w-screen-xl mx-auto container p-4 pl-12">
       {step === 1 && (
         <>
           <div className="breadcrumb">

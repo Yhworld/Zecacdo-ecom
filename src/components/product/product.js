@@ -42,7 +42,7 @@ const ProductDetail = () => {
 
   return (
     <div>
-      <Breadcrumb pathMapping={pathMapping} extraBreadcrumbs={extraBreadcrumbs} />
+      <div className='pl-8'><Breadcrumb pathMapping={pathMapping} extraBreadcrumbs={extraBreadcrumbs} /></div>
       <ProductDisplay product={product} />
     </div>
   );

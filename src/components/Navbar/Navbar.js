@@ -30,7 +30,7 @@ function Navbar() {
 
   return (
     <div id="topbar" className={`${isHomepage ? 'absolute' : 'relative'} top-0 z-10 p-4 ${isHomepage ? 'bg-transparent' : 'bg-white'}`}>
-      <div className="max-w-screen-xl container flex items-center justify-between md:mx-auto p-4">
+      <div className="max-w-screen-xl container flex items-center justify-between md:mx-auto p-4 md:pl-8">
         <NavLink to="/">
           <Logo id="logo" fill={isHomepage ? '#fff' : '#65371F'}/>
         </NavLink>

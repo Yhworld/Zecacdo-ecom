@@ -33,7 +33,7 @@ function Cart() {
   };
 
   return (
-    <div className="max-w-screen-xl p-4 container mx-auto">
+    <div className="max-w-screen-xl p-8 pl-12 container mx-auto">
       <h3 className="text-2xl font-bold mb-4">Your Cart</h3>
       <Breadcrumb pathMapping={pathMapping} />
       {cart.length === 0 ? (

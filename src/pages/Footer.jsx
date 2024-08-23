@@ -4,7 +4,7 @@ import { ReactComponent as Logo } from '../assets/logo/zecado.svg';
 
 function Footer() {
   return (
-    <footer className="bg-white mt-32 bottom-0">
+    <footer className="bg-white mt-32 bottom-0 p-4">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <NavLink to="/">
           <Logo id="logo" fill='#65371F'/>

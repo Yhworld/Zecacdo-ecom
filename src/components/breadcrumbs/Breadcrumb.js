@@ -24,7 +24,7 @@ const Breadcrumb = ({ pathMapping = {}, extraBreadcrumbs = [] }) => {
 
   return (
     <nav aria-label="breadcrumb">
-      <ol className="breadcrumb mx-auto container max-w-screen-xl">
+      <ol className="breadcrumb mx-auto container max-w-screen-xl pl-4">
         <li className="breadcrumb-item"><Link to="/">Home</Link></li>
         {extraBreadcrumbs.map(({ name, path }, index) => (
           <li key={path} className={`breadcrumb-item ${index === extraBreadcrumbs.length - 1 ? 'active' : ''}`}>

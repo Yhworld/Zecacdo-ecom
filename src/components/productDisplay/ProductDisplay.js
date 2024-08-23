@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { addToCart, incrementQuantity, decrementQuantity } from '../../slices/CartSlice';
-import { PiHeartThin } from "react-icons/pi";
+import { addToWishlist, removeFromWishlist } from '../../slices/wishlistslice';
+import { PiHeartThin, PiHeartFill } from "react-icons/pi"; // Import the filled heart icon
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./productdisplay.css";
@@ -10,12 +10,13 @@ import "./productdisplay.css";
 const ProductDisplay = (props) => {
   const { product } = props;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   
   const [quantity, setQuantity] = useState(1);
   const [priceClass, setPriceClass] = useState('');
   
   const cartItem = useSelector(state => state.cart.cart.find(item => item.id === product.id));
+  const wishlistItem = useSelector(state => state.wishlist.wishlist.find(item => item.id === product.id)); // Track wishlist state
+
   const initialQuantity = cartItem ? cartItem.quantity : 0;
 
   useEffect(() => {
@@ -32,6 +33,19 @@ const ProductDisplay = (props) => {
       price: product.price,
       quantity: quantity
     }));
+  };
+
+  const handleWishlistToggle = () => {
+    if (wishlistItem) {
+      dispatch(removeFromWishlist(product.id));
+    } else {
+      dispatch(addToWishlist({
+        id: product.id,
+        image: product.imageUrl,
+        title: product.name,
+        price: product.price
+      }));
+    }
   };
 
   const incrementLocalQuantity = () => {
@@ -73,15 +87,11 @@ const ProductDisplay = (props) => {
     {
       original: product.imageUrl,
       thumbnail: product.imageUrl,
-    },
-    // {
-    //   original: product.imageUrl,
-    //   thumbnail: product.imageUrl,
-    // }
+    }
   ];
 
   return (
-    <div className="mx-auto container mt-12 flex flex-col md:flex-row justify-between">
+    <div className="mx-auto container mt-12 flex  p-4 md:p-4 flex-col md:flex-row justify-between">
       <div className="flex flex-col items-center md:w-2/5">
         <ImageGallery items={images}
         showPlayButton={false} 
@@ -89,10 +99,26 @@ const ProductDisplay = (props) => {
         showNav={false}
         />
       </div>
-      <div id="product-listing" className="space-y-6 p-4 md:p-4 md:w-1/2">
+      <div id="product-listing" className="space-y-6 md:w-1/2">
         <div className="flex justify-between items-center space-x-20">
           <h1 className="text-3xl font-medium" id="product-title">{product.name}</h1>
-          <PiHeartThin className="text-2xl" />
+          {/* Heart Icon with Tooltip and Toggle Functionality */}
+          <div className="relative group">
+            <div 
+              className="cursor-pointer" 
+              onClick={handleWishlistToggle} 
+              title={wishlistItem ? "Remove from wishlist" : "Add to wishlist"}
+            >
+              {wishlistItem ? (
+                <PiHeartFill className="text-2xl text-red-500" />
+              ) : (
+                <PiHeartThin className="text-2xl" />
+              )}
+            </div>
+            <span className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+              {wishlistItem ? "Remove from wishlist" : "Add to wishlist"}
+            </span>
+          </div>
         </div>
         <h2 className={`font-medium text-2xl price ${priceClass}`}>$ {product.price}</h2>
         <p>Quantity</p>
@@ -102,8 +128,8 @@ const ProductDisplay = (props) => {
           <button className="border border-gray-300 px-2 py-2" onClick={incrementLocalQuantity}>+</button>
         </div>
         <div className="flex space-x-6">
-          <button className="bg-brown text-white px-16 py-2">Buy Now</button>
-          <button className="text-black border border-black px-16 py-2" onClick={handleAddToCart}>
+          <button className="bg-brown text-white px-8 py-2 md:px-16">Buy Now</button>
+          <button className="text-black border border-black px-8 md:px-16 py-2" onClick={handleAddToCart}>
             Add to cart
           </button>
         </div>
@@ -124,4 +150,5 @@ const ProductDisplay = (props) => {
     </div>
   );
 };
+
 export default ProductDisplay;
