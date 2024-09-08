@@ -6,6 +6,7 @@ import { PiHeartThin, PiHeartFill } from "react-icons/pi"; // Import the filled 
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./productdisplay.css";
+import SimilarProducts from "../similar/SimilarProducts";
 
 const ProductDisplay = (props) => {
   const { product } = props;
@@ -91,7 +92,8 @@ const ProductDisplay = (props) => {
   ];
 
   return (
-    <div className="mx-auto container mt-12 flex  p-4 md:p-4 flex-col md:flex-row justify-between">
+    <div className="max-w-screen-xl mx-auto container">
+    <div className=" mt-12 flex p-4 flex-col md:flex-row justify-between">
       <div className="flex flex-col items-center md:w-2/5">
         <ImageGallery items={images}
         showPlayButton={false} 
@@ -99,8 +101,8 @@ const ProductDisplay = (props) => {
         showNav={false}
         />
       </div>
-      <div id="product-listing" className="space-y-6 md:w-1/2">
-        <div className="flex justify-between items-center space-x-20">
+      <div id="product-listing" className="space-y-6 p-6 md:pr-12 md:w-1/2">
+        <div className="flex pt-8 md:pt-0 justify-between items-center space-x-20">
           <h1 className="text-3xl font-medium" id="product-title">{product.name}</h1>
           {/* Heart Icon with Tooltip and Toggle Functionality */}
           <div className="relative group">
@@ -129,7 +131,7 @@ const ProductDisplay = (props) => {
         </div>
         <div className="flex space-x-6">
           <button className="bg-brown text-white px-8 py-2 md:px-16">Buy Now</button>
-          <button className="text-black border border-black px-8 md:px-16 py-2" onClick={handleAddToCart}>
+          <button className="text-black border border-black px-8 md:px-12 py-2" onClick={handleAddToCart}>
             Add to cart
           </button>
         </div>
@@ -143,10 +145,12 @@ const ProductDisplay = (props) => {
         <div className="space-y-4">
           <hr className="border border-gray-300 mt-4" />
           <h1>Scents Profile</h1>
-          <div>{product.description}</div>
+          <div className="flex flex-wrap">{product.description}</div>
           <hr className="border border-gray-300 mt-4" />
         </div>
       </div>
+      </div>
+      <SimilarProducts currentProduct={product} />
     </div>
   );
 };

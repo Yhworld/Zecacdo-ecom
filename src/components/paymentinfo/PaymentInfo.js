@@ -1,9 +1,12 @@
 import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import { clearCart } from '../../slices/CartSlice';
 
 const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
   const stripePromise = loadStripe('pk_test_51PgDnrRqi6j1CvUPecANJms2XRCq0af9Xnyo0TEiKFkCg94XfURKW8fUrVj5bTvfcfi9eFD53qrT1WQrw4Yqja660014M32xRx');
+  const dispatch = useDispatch();
 
   // Callback to fetch the client secret from the server
   const fetchClientSecret = useCallback(async () => {
@@ -14,7 +17,7 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
 
     try {
       const payload = {
-        items: initialData.items, // Ensure this is correctly structured
+        items: initialData.items,
         customerName: initialData.customerName,
         customerEmail: initialData.customerEmail,
       };
@@ -38,9 +41,16 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
     }
   }, [initialData]);
 
+  // Handle payment completion
+  const handlePaymentComplete = () => {
+    dispatch(clearCart()); // Clear the cart on payment success
+    onNext(); // Move to the next step if needed
+  };
+
   // Options for the EmbeddedCheckoutProvider
   const options = {
     fetchClientSecret,
+    onComplete: handlePaymentComplete, // Add this callback to clear the cart on success
   };
 
   return (
