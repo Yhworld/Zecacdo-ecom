@@ -7,6 +7,7 @@ import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./productdisplay.css";
 import SimilarProducts from "../similar/SimilarProducts";
+import ProductReview from "../productReview/ProductReview";
 
 const ProductDisplay = (props) => {
   const { product } = props;
@@ -151,6 +152,7 @@ const ProductDisplay = (props) => {
       </div>
       </div>
       <SimilarProducts currentProduct={product} />
+      {/* <ProductReview /> */}
     </div>
   );
 };

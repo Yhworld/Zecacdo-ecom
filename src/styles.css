@@ -40,3 +40,16 @@ html, body {
 .content {
   flex: 1;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#contact, #about, #bgshop, #emotions, #carting{
+  animation: fadeIn 1.7s ease-in-out;
+}

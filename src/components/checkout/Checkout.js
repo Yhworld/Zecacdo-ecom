@@ -98,56 +98,13 @@ const Checkout = () => {
             <button onClick={() => navigate('/')} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Continue Shopping</button>
           </div>
         ) : (
-          <>
-            {step === 1 && (
-              <>
-                <ContactInformation onNext={handleNext} />
-                <div className="order-summary md:border border-gray-300 p-6 mx-auto max-w-md">
-                  <div className='sticky'>
-                    {cart.map((item) => (
-                      <div key={item.id} className="summary-item mb-4">
-                        <div className='flex items-center space-x-14'>
-                          <div className='relative border border-grey-200'>
-                            <img src={item.image} alt={item.name} className="w-24 h-24 mt-2" />
-                            <span className="font-bold absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-black text-white text-xs rounded-full px-2">
-                              × {item.quantity}
-                            </span>
-                          </div>
-                          <div className="summary-item-details">
-                            {item.title}
-                          </div>
-                        </div>
-                        <div className="summary-item-price">
-                          $ {item.price}
-                        </div>
-                      </div>
-                    ))}
-                    <div className="summary-total pt-4">
-                      <div className="total-items flex justify-between mb-2">
-                        <span>Items [{totalItems}]</span>
-                        <span>$ {totalPrice}</span>
-                      </div>
-                      <div className="shipping-fee flex justify-between mb-2">
-                        <span>Shipping Fee</span>
-                        <span>Enter shipping address</span>
-                      </div>
-                      <div className="order-total flex justify-between font-semibold">
-                        <span>Total:</span>
-                        <span>$ {totalPrice}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-            {step === 2 && (
+          <>   
               <div className="checkout-payment">
                 <PaymentInformation
                   onPrevious={handlePrevious}
                   initialData={{ ...contactInfo, items }} // Pass the structured items array
                 />
               </div>
-            )}
           </>
         )}
       </div>

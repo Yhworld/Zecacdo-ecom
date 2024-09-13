@@ -33,7 +33,8 @@ function Cart() {
   };
 
   return (
-    <div className="max-w-screen-xl p-8 pl-12 container mx-auto">
+    <div className="max-w-screen-xl p-8 container mx-auto"
+    >
       <h3 className="text-2xl font-bold mb-4">Your Cart</h3>
       <Breadcrumb pathMapping={pathMapping} />
       {cart.length === 0 ? (
@@ -41,7 +42,7 @@ function Cart() {
           Your cart is currently empty.
         </div>
       ) : (
-        <div className='flex flex-col md:flex-row space-x-4 md:justify-between'>
+        <div id='carting' className='flex flex-col md:flex-row space-x-4 md:justify-between'>
           <div className='w-full'>
             {cart.map(item => (
               <CartItem
@@ -54,8 +55,8 @@ function Cart() {
               />
             ))}
           </div>
-          <div className="space-y-8 md:bg-zpink p-6 h-80 w-full md:w-1/3">
-            <div className="order-summary hidden md:block md:text-center text-2xl">ORDER SUMMARY</div>
+          <div className="space-y-8 p-4 mt-6 md:mt-0 md:bg-zpink h-80 w-full md:w-1/3">
+            <div className="order-summary text-center hidden md:block text-2xl">ORDER SUMMARY</div>
             <p className="flex justify-between text-2xl items-center">
               <span>Total:</span> <strong>${getTotal().totalPrice}</strong>
             </p>

@@ -23,6 +23,13 @@
   position: relative;
 }
 
+/* Active link styling */
+.active-link {
+  color: brown; /* Example active color */
+  border-bottom: solid 3px brown; /* Active underline */
+}
+
+
 .nav-link:hover:after {
   transform: scaleX(1);
 }

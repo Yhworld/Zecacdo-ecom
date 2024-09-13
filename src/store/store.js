@@ -11,11 +11,13 @@ import {
   REGISTER,
 } from 'redux-persist';
 
+
 import productReducer from "../slices/ProductSlice";
 import { cartReducer } from "../slices/CartSlice";
 import categoryReducer from "../slices/CategorySlice";
 import orderReducer from '../slices/orderSlice';
 import { wishlistReducer } from '../slices/wishlistslice';  // Import wishlistReducer
+import authReducer from '../slices/AuthSlice';
 
 const cartPersistConfig = {
   key: 'cart',
@@ -37,6 +39,7 @@ export const store = configureStore({
     wishlist: persistedWishlistReducer,  // Add wishlist to the store
     categories: categoryReducer,
     order: orderReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

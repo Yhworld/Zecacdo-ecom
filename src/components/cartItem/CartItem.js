@@ -6,10 +6,10 @@ function CartItem({ id, image, title, price, quantity }) {
   const dispatch = useDispatch();
 
   return (
-    <div className="container mx-auto border md:border-gray-200 md:p-4 mb-4">
-      <div className="flex items-center justify-between">
+    <div className="mx-auto container md:border md:border-gray-200 md:p-4 mt-4">
+      <div className="flex space-x-4 items-center justify-between">
         <div className="w-1/4">
-          <div className="text-gray-700 mb-2">Product</div>
+          <div className="hidden md:block text-gray-700 mb-2">Product</div>
           <img className="w-32 h-32 object-cover" src={image} alt="item" />
         </div>
         <div className="w-1/4">

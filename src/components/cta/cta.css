@@ -3,7 +3,18 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%; 
-    height: 60vh;
+    height: 80vh;
     background-position: center center;
     /* height: 70%; */
 }
+
+@media (max-width: 767px) {
+  
+    #cta-hero {
+    
+      background-position: top center;
+      background-attachment: fixed;
+    }
+    
+  }
+  

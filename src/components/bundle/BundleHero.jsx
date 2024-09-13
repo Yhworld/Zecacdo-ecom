@@ -1,5 +1,6 @@
 import React from "react";
 import "./bundle.css";
+import { Link } from "react-router-dom";
 
 function BundleHero() {
   return (
@@ -16,8 +17,8 @@ function BundleHero() {
             COLLECTION
           </h2>
           <div className="mt-4">
-            <a
-              href="#_"
+            <Link
+              to='/shop'
               class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-white transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-transparent group"
             >
               {/* <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-white group-hover:h-full"></span> */}
@@ -56,7 +57,7 @@ function BundleHero() {
               <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
                 Shop now
               </span>
-            </a>
+            </Link>
           </div>
         </div>
         <div
@@ -70,8 +71,8 @@ function BundleHero() {
             COLLECTION
           </h2>
           <div className="mt-4">
-            <a
-              href="#_"
+            <Link
+              to='/shop'
               class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-white transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-transparent group"
             >
               {/* <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-white group-hover:h-full"></span> */}
@@ -110,7 +111,7 @@ function BundleHero() {
               <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
                 Shop now
               </span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

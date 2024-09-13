@@ -15,11 +15,18 @@ import PaymentInformation from './components/paymentinfo/PaymentInfo';
 import Confirmation from './components/confirmation/Confirmation';
 import Privacy from './components/Legal/Privacy';
 import Terms from './components/Legal/Terms';
+import  Callback  from './components/Callback/Callback'
+import  Profile  from './components/profile/Profile'
+import ScrollToTop from './pages/ScrollToTop';
+import ProtectedRoute from './pages/ProtectedRoute';
+import NotFound from './pages/404/NotFound';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
     <div className="app-container">  
       <Navbar />
+      <ScrollToTop />
       <div className="content">
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -34,6 +41,8 @@ function App() {
           <Route path="/privacy-policy" element={<Privacy />} />
           <Route path="/terms-and-conditions" element={<Terms />} />
           <Route path="/orderid/:orderId" element={<OrderConfirmation />} />
+          <Route path="/contact" element={<ContactPage/>} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
       <Footer />

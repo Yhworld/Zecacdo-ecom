@@ -2,8 +2,9 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  background-attachment: fixed;
   /* min-height: calc(70vh - 12px); */
-  background-position: 10% 60%;
+  background-position: 10% 90%;
 }
 
 #hero-text {
@@ -11,9 +12,14 @@
   font-weight: lighter;
 }
 
+#hero-link {
+  padding: 15px 30px;
+  margin-top: 2rem;
+}
+
 #hero-shop {
   /* width: 2rem; */
-  padding: 10px 80px;
+  padding: 10px 60px;
   margin-top: 2rem;
 }
 
@@ -44,4 +50,15 @@
   #hero-shop {
     padding: 10px 20px; /* Adjust padding */
   }
+
+  #emotions {
+  
+    background-position: top center;
+    background-attachment: fixed;
+    /* min-height: calc(70vh - 12px); */
+    background-position: 10% 80%
+  }
+  
 }
+
+
