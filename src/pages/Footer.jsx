@@ -10,7 +10,7 @@ function Footer() {
           <Logo id="logo" fill='#65371F'/>
         </NavLink>
         <div className="md:flex md:space-x-80 items-center"> 
-          <div className="mb-6 md:mb-0">
+          {/* <div className="mb-6 md:mb-0">
             <div className='mt-2 space-y-4'>
               <label htmlFor="small-input" className="block mb-2 text-md font-medium text-gray-900">
                 Subscribe to our <br /> newsletter
@@ -25,21 +25,21 @@ function Footer() {
                 <button className='bg-brown text-white font-bold px-4 py-1'>&gt;</button>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
               <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase">Services</h2>
               <ul className="text-brown font-medium space-y-4">
-                <li><a href="#g" className="hover:underline">Email Marketing</a></li>
-                <li><a href="#h" className="hover:underline">Campaigns</a></li>
-                <li><a href="#h" className="hover:underline">Branding</a></li>
+                <li><a href="#g" className="hover:underline">Shop</a></li>
+                <li><a href="#h" className="hover:underline">Cart</a></li>
+                <li><a href="#h" className="hover:underline">About</a></li>
               </ul>
             </div>
             <div>
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">Follow us</h2>
               <ul className="text-brown font-medium">
-                <li className="mb-4"><a href="https://github.com" className="hover:underline">Github</a></li>
-                <li><a href="https://discord.gg" className="hover:underline">Discord</a></li>
+                <li className="mb-4"><a href="https://www.instagram.com/zecado_/?api=1" className="hover:underline">Instagram</a></li>
+                <li><a href="https://www.tiktok.com/@zecadofragrance" className="hover:underline">Tiktok</a></li>
               </ul>
             </div>
             <div>
