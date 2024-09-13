@@ -4,9 +4,11 @@ import emailjs from "@emailjs/browser";
 function ContactPage() {
   const form = useRef();
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setLoading(true); // Set loading to true when email is being sent
 
     emailjs
       .sendForm("service_4mtguag", "template_rreuvet", form.current, {
@@ -14,6 +16,7 @@ function ContactPage() {
       })
       .then(
         () => {
+          setLoading(false); // Stop loading once the email is sent
           console.log("SUCCESS!");
           setShowSuccessAlert(true); // Show the success alert
           form.current.reset();
@@ -22,15 +25,17 @@ function ContactPage() {
           }, 5000); // Adjust the time as needed
         },
         (error) => {
+          setLoading(false); // Stop loading if the email sending fails
           console.log("FAILED...", error.text);
         }
       );
   };
+
   return (
     <>
       <section className="bg-white" id="contact">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        {showSuccessAlert && ( // Display the success alert when showSuccessAlert is true
+          {showSuccessAlert && (
             <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
               <strong className="font-bold">Success!</strong>
               <span className="block sm:inline"> Your message has been sent successfully.</span>
@@ -41,9 +46,6 @@ function ContactPage() {
           )}
           <div className="mb-4">
             <div className="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
-              {/* <p className="text-base font-semibold uppercase tracking-wide text-black dark:text-black">
-                    Contact
-                </p> */}
               <h2 className="font-heading mb-4 font-bold tracking-tight text-brown text-3xl sm:text-5xl">
                 Talk to Us
               </h2>
@@ -71,9 +73,9 @@ function ContactPage() {
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         className="h-6 w-6"
                       >
                         <path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
@@ -99,9 +101,9 @@ function ContactPage() {
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         className="h-6 w-6"
                       >
                         <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
@@ -123,35 +125,34 @@ function ContactPage() {
                 <h2 className="mb-4 text-2xl font-bold">
                   Ready to Get Started?
                 </h2>
-                <form id="contactForm"
-               
-                ref={form} onSubmit={sendEmail}
-                >
+                <form id="contactForm" ref={form} onSubmit={sendEmail}>
                   <div className="mb-6">
                     <div className="mx-0 mb-1 sm:mb-4">
                       <div className="mx-0 mb-1 sm:mb-4">
                         <label
-                          for="name"
+                          htmlFor="name"
                           className="pb-1 text-xs uppercase tracking-wider"
                         ></label>
                         <input
                           type="text"
                           id="name"
-                          autocomplete="given-name"
+                          autoComplete="given-name"
                           placeholder="Your name"
+                          required
                           className="mb-2 w-full rounded-md border border-gray-600 py-2 pl-2 pr-4 shadow-md sm:mb-0"
                           name="user_name"
                         />
                       </div>
                       <div className="mx-0 mb-1 sm:mb-4">
                         <label
-                          for="email"
+                          htmlFor="email"
                           className="pb-1 text-xs uppercase tracking-wider"
                         ></label>
                         <input
                           type="email"
                           id="email"
-                          autocomplete="email"
+                          autoComplete="email"
+                          required
                           placeholder="Your email address"
                           className="mb-2 w-full rounded-md border border-gray-600 py-2 pl-2 pr-4 shadow-md sm:mb-0"
                           name="user_email"
@@ -160,14 +161,16 @@ function ContactPage() {
                     </div>
                     <div className="mx-0 mb-1 sm:mb-4">
                       <label
-                        for="textarea"
+                        htmlFor="textarea"
                         className="pb-1 text-xs uppercase tracking-wider"
                       ></label>
                       <textarea
                         id="textarea"
-                        name="message" 
+                        name="message"
                         cols="30"
                         rows="5"
+                        required
+                      
                         placeholder="Write your message..."
                         className="mb-2 w-full rounded-md border border-gray-600 py-2 pl-2 pr-4 shadow-md sm:mb-0"
                       ></textarea>
@@ -177,9 +180,33 @@ function ContactPage() {
                     <button
                       type="submit"
                       value="Send"
-                      className="w-full bg-brown text-white px-6 py-3 font-xl rounded-md sm:mb-0"
+                      className="w-full bg-brown text-white px-6 py-3 font-xl rounded-md sm:mb-0 disabled:opacity-50 disabled:cursor-not-allowed relative"
+                      disabled={loading} // Disable button when loading
                     >
-                      Send Message
+                      {loading ? (
+                        <svg
+                          className="animate-spin h-5 w-5 text-white absolute left-1/2 transform -translate-x-1/2"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          ></circle>
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 0 1 16 0H4z"
+                          ></path>
+                        </svg>
+                      ) : (
+                        "Send Message"
+                      )}
                     </button>
                   </div>
                 </form>
