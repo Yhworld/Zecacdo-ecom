@@ -97,10 +97,10 @@ function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
               <h2 className="mb-6 text-sm font-semibold text-slate-900 uppercase">Services</h2>
-              <ul className="text-brown font-medium space-y-4">
-                <li><a href="#g" className="hover:underline">Shop</a></li>
-                <li><a href="#h" className="hover:underline">Cart</a></li>
-                <li><a href="#h" className="hover:underline">About</a></li>
+              <ul className="text-brown font-medium space-y-4 flex flex-col">
+                <NavLink to='/shop' className="hover:underline">Shop</NavLink>
+                <NavLink to='/cart' className="hover:underline">Cart</NavLink>
+                <NavLink to='/about' className="hover:underline">About</NavLink>
               </ul>
             </div>
             <div>
@@ -112,9 +112,9 @@ function Footer() {
             </div>
             <div>
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">Legal</h2>
-              <ul className="text-brown font-medium">
-                <li className="mb-4"><a href="#dse" className="hover:underline">Privacy Policy</a></li>
-                <li><a href="#sw" className="hover:underline">Terms &amp; Conditions</a></li>
+              <ul className="text-brown font-medium flex flex-col">
+                <NavLink to='/privacy-policy' className="mb-4">Privacy Policy</NavLink>
+                <NavLink to='/terms-and-conditions' className="hover:underline">Terms &amp; Conditions</NavLink>
               </ul>
             </div>
           </div>
