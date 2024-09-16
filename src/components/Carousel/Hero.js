@@ -6,7 +6,7 @@ import './hero.css'
 function Hero() {
   const [current, setCurrent] = useState(0);
   
-  const imagePaths = ['/image2.jpeg', '/image3.jpeg', '/image4.jpeg']
+  const imagePaths = ['/image2.webp', '/image3.webp', '/image4.webp']
   
 
   // const previousSlide = () => {

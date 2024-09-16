@@ -54,9 +54,9 @@
   #emotions {
   
     background-position: top center;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     /* min-height: calc(70vh - 12px); */
-    background-position: 10% 80%
+    background-position: 60% 60%
   }
   
 }
