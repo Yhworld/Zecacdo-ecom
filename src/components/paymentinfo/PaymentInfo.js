@@ -23,7 +23,7 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
 
       console.log('Fetching client secret with payload:', payload);
 
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/create-checkout-session`, {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}create-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
