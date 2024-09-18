@@ -12,7 +12,7 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
   // Callback to fetch the client secret from the server
   const fetchClientSecret = useCallback(async () => {
     if (!initialData || !initialData.items) {
-      console.error('Initial data or items are missing');
+      // console.error('Initial data or items are missing');
       return;
     }
 
@@ -21,7 +21,6 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
         items: initialData.items, // Only send the items, no customer details
       };
 
-      console.log('Fetching client secret with payload:', payload);
 
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}create-checkout-session`, {
         method: 'POST',
@@ -53,9 +52,9 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
       // Wait for the persistor to flush
       await persistor.flush();
 
-      console.log('Cart has been cleared and localStorage updated');
+      // console.log('Cart has been cleared and localStorage updated');
     } catch (error) {
-      console.error('Error handling payment completion:', error);
+      // console.error('Error handling payment completion:', error);
     }
   }, [dispatch]);
 
