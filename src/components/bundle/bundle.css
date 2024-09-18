@@ -1,14 +1,27 @@
 #bundle-black, #bundle-white {
-    background-image: url('../../../public/image4.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100%; 
+    background-position: center;
+    width: 100%;
     background-attachment: fixed;
-    /* height: 50vh; */
-    /* width: 50%; */
     height: 600px;
+    transition: background-image 0.3s ease-in-out; /* Add smooth transition */
+}
+
+/* Original gradient background */
+#bundle-black {
+    background-image: linear-gradient(rgba(12, 12, 12, 0.6) 21.84%, rgb(12, 12, 12) 71.03%), url('../../../public/WhatsApp\ Image\ 2024-09-17\ at\ 17.34.55.webp');
 }
 
 #bundle-white {
-    background-image: url('../../../public/image5.png');
+    background-image: linear-gradient(rgba(12, 12, 12, 0.6) 21.84%, rgb(12, 12, 12) 71.03%), url('../../../public/WhatsApp\ Image\ 2024-09-17\ at\ 17.34.56.webp');
+}
+
+/* Remove gradient on hover */
+#bundle-black:hover {
+    background-image: linear-gradient(rgba(12, 12, 12, 0.234) 21.84%, rgba(12, 12, 12, 0.251) 71.03%),url('../../../public/WhatsApp\ Image\ 2024-09-17\ at\ 17.34.55.webp');
+}
+
+#bundle-white:hover {
+    background-image: linear-gradient(rgba(12, 12, 12, 0.234) 21.84%, rgba(12, 12, 12, 0.251) 71.03%),url('../../../public/WhatsApp\ Image\ 2024-09-17\ at\ 17.34.56.webp');
 }
