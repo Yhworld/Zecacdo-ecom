@@ -1,3 +1,7 @@
 #featured-header {
     font-family: var(--hero-font);
 }
+
+#featured-page img {
+    width: 60%;
+}

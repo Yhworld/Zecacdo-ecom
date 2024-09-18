@@ -18,7 +18,7 @@ function Feature() {
   }, [dispatch, loading, products.length]);
 
   return (
-    <div className=' mx-auto container mt-20 mb-24'>
+    <div id='featured-page' className=' mx-auto container mt-20 mb-24'>
       <h1 className="md:text-3xl text-2xl text-center text-slate-700" id='featured-header'>FEATURED PRODUCTS</h1>
       {loading ? (
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">

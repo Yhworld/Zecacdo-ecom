@@ -2,6 +2,10 @@
     font-family: var(--hero-font);
 }
 
+img {
+  width: 60%;
+}
+
 .filter-container {
     max-height: calc(100vh - 200px); /* Dynamic max height based on viewport height */
     overflow-y: auto;
