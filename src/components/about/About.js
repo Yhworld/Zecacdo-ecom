@@ -2,13 +2,14 @@ import React from "react";
 // import Cta from "../CTA/Cta";
 // import Footer from "../Footer/Footer";
 import './about.css'
-let aboutImg = require("../../assets/campaign-creators-gMsnXqILjp4-unsplash.jpg");
+let aboutImg = require("../../assets/groupzecado.webp");
+let aboutImg2 = require("../../assets/bosszecado.webp");
 
 function About() {
   return (
     <>
     <div id="about" className="max-w-screen-xl container mx-auto p-12">
-      <div className="flex flex-col lg:flex-row justify-between gap-8 mt-8">
+      <div className="flex flex-col lg:flex-row justify-around gap-8 mt-8">
         <div className="w-full lg:w-5/12 flex flex-col justify-center">
           <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">
             Our Story
@@ -23,17 +24,17 @@ function About() {
             </p> */}
           </p>
         </div>
-        <div className="">
+        <div className="about-image">
           <img
-            className=""
-            src="https://i.ibb.co/FhgPJt8/Rectangle-116.png"
+             className="aboutimg2"
+            src={aboutImg2}
             alt="A group of People"
             loading="lazy"
           />
         </div>
       </div>
 
-      <div className="flex lg:flex-row flex-col gap-8 justify-between mt-24">
+      <div className="flex lg:flex-row flex-col gap-8 justify-around mt-24">
         <div className="">
           <img
             className="aboutimg2"
