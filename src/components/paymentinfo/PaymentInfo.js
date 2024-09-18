@@ -1,18 +1,23 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { EmbeddedCheckoutProvider, EmbeddedCheckout } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { clearCart } from '../../slices/CartSlice';
 import { persistor } from '../../store/store';
+import Spinner from '../spinner/Spinner'
 
 const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
-  const stripePromise = useMemo(() => loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY), []); // memoize stripe initialization
+  const [clientSecret, setClientSecret] = useState(null);
+  const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useDispatch();
 
-  // Callback to fetch the client secret from the server
+  // Memoize stripe initialization
+  const stripePromise = useMemo(() => loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY), []);
+
+  // Fetch client secret from server
   const fetchClientSecret = useCallback(async () => {
     if (!initialData || !initialData.items) {
-      // console.error('Initial data or items are missing');
+      setErrorMessage('No items available for checkout.');
       return;
     }
 
@@ -20,7 +25,6 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
       const payload = {
         items: initialData.items, // Only send the items, no customer details
       };
-
 
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}create-checkout-session`, {
         method: 'POST',
@@ -35,34 +39,43 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
       }
 
       const data = await response.json();
-      console.log('Client secret fetched:', data.clientSecret);
+      setClientSecret(data.clientSecret);
       return data.clientSecret;
     } catch (error) {
+      setErrorMessage('Error fetching payment details. Please try again.');
       console.error('Error fetching client secret:', error);
-      throw error;
     }
   }, [initialData]);
 
-  // Memoize the handlePaymentComplete function to avoid prop change
+  // Clear cart after payment
   const handlePaymentComplete = useCallback(async () => {
     try {
-      // Clear the cart
       dispatch(clearCart());
-
-      // Wait for the persistor to flush
       await persistor.flush();
-
-      // console.log('Cart has been cleared and localStorage updated');
+      console.log('Cart has been cleared');
     } catch (error) {
-      // console.error('Error handling payment completion:', error);
+      console.error('Error handling payment completion:', error);
     }
   }, [dispatch]);
 
-  // Memoize the options to prevent prop change on EmbeddedCheckoutProvider
+  // Memoize options
   const options = useMemo(() => ({
     fetchClientSecret,
     onComplete: handlePaymentComplete,
   }), [fetchClientSecret, handlePaymentComplete]);
+
+  // Fetch client secret on component mount
+  useEffect(() => {
+    fetchClientSecret();
+  }, [fetchClientSecret]);
+
+  if (errorMessage) {
+    return <div className="error-message">{errorMessage}</div>;
+  }
+
+  if (!clientSecret) {
+    return <Spinner />
+  }
 
   return (
     <div id="checkout">
