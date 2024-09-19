@@ -23,7 +23,7 @@ const Checkout = () => {
 
   const totalItems = cart.length;
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-  const items = cart.map(item => ({ id: item.id, quantity: item.quantity, cartID }));
+  const items = cart.map(item => ({ id: item.id, quantity: item.quantity}));
 
   useEffect(() => {
     if (cart.length === 0 && !orderSuccess) {
@@ -103,7 +103,7 @@ const Checkout = () => {
               <div className="checkout-payment">
                 <PaymentInformation
                   onPrevious={handlePrevious}
-                  initialData={{ ...contactInfo, items }} // Pass the structured items array
+                  initialData={{ cartID, items }} // Pass the structured items array
                 />
               </div>
           </>
