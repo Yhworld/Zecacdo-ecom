@@ -21,6 +21,8 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
       return;
     }
 
+    console.log('Items in cart:', initialData.items);
+
     try {
       const payload = {
         items: initialData.items, // Only send the items, no customer details
