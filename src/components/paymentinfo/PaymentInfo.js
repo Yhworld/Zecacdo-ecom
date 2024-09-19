@@ -21,7 +21,7 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
       return;
     }
 
-    console.log('Items in cart:', initialData.items);
+    // console.log('Items in cart:', initialData.items);
 
     try {
       const payload = {
