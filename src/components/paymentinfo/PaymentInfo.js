@@ -25,7 +25,8 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
 
     try {
       const payload = {
-        items: initialData.items, // Only send the items, no customer details
+        items: initialData.items,
+        cartID: initialData.cartID,
       };
 
       const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}create-checkout-session`, {
