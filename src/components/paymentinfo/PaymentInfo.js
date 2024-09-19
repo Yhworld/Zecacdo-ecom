@@ -20,7 +20,7 @@ const PaymentInformation = ({ onNext, onPrevious, initialData }) => {
       setErrorMessage('No items available for checkout.');
       return;
     }
-
+    console.log(initialData);
     console.log('Items in cart:', initialData.cartID);
 
     try {
