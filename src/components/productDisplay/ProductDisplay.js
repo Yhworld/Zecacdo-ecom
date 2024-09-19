@@ -47,7 +47,6 @@ const ProductDisplay = (props) => {
     dispatch(
       addToCart({
         id: product.id,
-        cartID: cartID, 
         image: product.imageUrl,
         title: product.name,
         price: product.price,

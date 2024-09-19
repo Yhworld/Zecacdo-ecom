@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import ProductDisplay from '../productDisplay/ProductDisplay'; // Ensure correct import path
 import Breadcrumb from '../breadcrumbs/Breadcrumb';
 import { fetchProductById } from '../../slices/ProductSlice'; // Ensure correct import path
+import Spinner from '../spinner/Spinner';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -19,7 +20,7 @@ const ProductDetail = () => {
   }, [dispatch, id]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Spinner /></div>;
   }
 
   if (error) {

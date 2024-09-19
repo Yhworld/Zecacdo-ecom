@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchProducts } from '../../slices/ProductSlice'
 import Item from '../item/Item';
+import Spinner from '../spinner/Spinner';
 
 const SearchResult = () => {
   const { query } = useParams();
@@ -21,7 +22,7 @@ const SearchResult = () => {
     return nameMatches || categoryMatches;
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><Spinner /></div>;
   if (error) return <div>Error: {error}</div>;
 
   return (
