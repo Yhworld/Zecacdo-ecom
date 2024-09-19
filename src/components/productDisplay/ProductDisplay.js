@@ -28,6 +28,10 @@ const ProductDisplay = (props) => {
   const cartItem = useSelector((state) =>
     state.cart.cart.find((item) => item.id === product.id)
   );
+
+  const cartID = useSelector((state) => state.cart.cartID);
+
+
   const wishlistItem = useSelector((state) =>
     state.wishlist.wishlist.find((item) => item.id === product.id)
   );
@@ -43,6 +47,7 @@ const ProductDisplay = (props) => {
     dispatch(
       addToCart({
         id: product.id,
+        cartID: cartID, 
         image: product.imageUrl,
         title: product.name,
         price: product.price,

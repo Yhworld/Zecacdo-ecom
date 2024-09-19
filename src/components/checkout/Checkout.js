@@ -15,6 +15,7 @@ const Checkout = () => {
   const orderError = order?.error;
 
   const navigate = useNavigate();
+  const cartID = useSelector((state) => state.cart.cartID);
   const dispatch = useDispatch();
   const [step, setStep] = useState(1);
   const [orderSuccess, setOrderSuccess] = useState(false);
@@ -22,7 +23,7 @@ const Checkout = () => {
 
   const totalItems = cart.length;
   const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
-  const items = cart.map(item => ({ id: item.id, quantity: item.quantity })); // Map to array of objects with id and quantity
+  const items = cart.map(item => ({ id: item.id, quantity: item.quantity, cartID }));
 
   useEffect(() => {
     if (cart.length === 0 && !orderSuccess) {
