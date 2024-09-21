@@ -1,25 +1,95 @@
 {
   "short_name": "Zecado",
-  "name": "Create React App Sample",
+  "name": "Zecado Fragrance - The Place Where Your Confidence Begins",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "/icons/favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192x192.png",
+      "src": "/icons/logo192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512x512.png",
+      "src": "/icons/logo512x512.png",
       "type": "image/png",
       "sizes": "512x512"
+    },
+    {
+      "src": "/icons/maskable_icon_x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/maskable_icon_x512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#1a1a1a",
+  "background_color": "#ffffff",
+  "description": "Zecado - A Fragrance Experience that Exudes Nostalgia, Confidence, and Simplicity.",
+  "scope": "/",
+  "orientation": "portrait",
+  "categories": ["shopping", "lifestyle", "beauty"],
+  "related_applications": [
+    {
+      "platform": "web",
+      "url": "https://www.zecadofragrance.com"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/screen1.png",
+      "type": "image/png",
+      "sizes": "540x720"
+    },
+    {
+      "src": "/screenshots/screen2.png",
+      "type": "image/png",
+      "sizes": "540x720"
+    }
+  ],
+  "dir": "ltr",
+  "lang": "en-US",
+  "prefer_related_applications": false,
+  "features": [
+    "push_notifications",
+    "offline_support",
+    "shopping_cart"
+  ],
+  "shortcuts": [
+    {
+      "name": "Shop Fragrances",
+      "short_name": "Shop",
+      "description": "Browse our latest fragrance collection.",
+      "url": "/shop",
+      "icons": [
+        {
+          "src": "/icons/shop_icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Special Offers",
+      "short_name": "Offers",
+      "description": "Check out exclusive deals and discounts.",
+      "url": "/offers",
+      "icons": [
+        {
+          "src": "/icons/offers_icon.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
 }
