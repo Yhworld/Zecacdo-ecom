@@ -12,12 +12,28 @@ function About() {
       <div className="flex flex-col lg:flex-row justify-around gap-8 mt-8">
         <div className="w-full lg:w-5/12 flex flex-col justify-center">
           <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">
-            Our Story
-          </h1>
-          <p className="font-normal text-base leading-6 text-gray-600">
-          Our journey at Zecado began with a vision to revolutionize the perfume industry by offering a fresh perspective on fragrances. While traditional niche and designer fragrances have dominated the market for over 50 years, we set out to carve our own path as a niche fragrance brand with a focus on crafting unique scents that tell a story of individuality and style.
-            <p className="pt-4 pb-4">
-            Inspired by my upbringing in a small town surrounded by nature's beauty – from serene lakes and beaches to the changing seasons – We here at Zecado developed a deep appreciation for the scents of the world around. These scents became a part of our most cherished memories, evoking feelings of comfort, joy, and nostalgia. It was during these moments that I discovered the transformative power of fragrances. The right scent had the ability to lift my mood, transport us to a different time and place, and even provide therapeutic benefits through its carefully curated ingredients.
+            <div className="font-normal text-base leading-6 text-gray-600">
+  <p>
+    Our journey at Zecado began with a vision to redefine the fragrance industry, offering a fresh perspective that speaks to individuality and style. While traditional niche and designer fragrances have shaped the market for over 50 years, we set out to create our own unique path as a niche brand, crafting scents that are more than just products—they’re experiences.
+  </p>
+
+  <p className="pt-4 pb-4">
+    Zecado was born from a simple, unforgettable moment. In 2022, while living in Lancaster, UK, I was wearing Dior Sauvage when a lady approached me and said, “You smell good.” That compliment did more than just lift my spirits; it sparked something deep within me. It was a rush of dopamine, that unmistakable surge of joy. In that moment, I discovered the profound power of fragrance—not just as a scent, but as an experience, a memory, a feeling that lingers.
+  </p>
+
+  <p className="pt-4 pb-4">
+    Inspired by my upbringing in a small town surrounded by nature’s beauty—from serene lakes and golden beaches to the changing seasons—I developed a deep appreciation for the scents of the world around me. These aromas evoke comfort, joy, and nostalgia, and I wanted to create fragrances that carry these sentiments forward.
+  </p>
+
+  <p className="pt-4 pb-4">
+    <strong>Our Story:</strong> Zecado’s foundation is rooted in the pursuit of unique, memorable fragrances inspired by both personal experiences and nature’s endless beauty. Our journey began with a single compliment that sparked a lifelong passion for the art of scent, evolving into a commitment to bring luxury, individuality, and nostalgia into each bottle.
+  </p>
+
+  <p className="pt-4 pb-4">
+    <strong>Our Mission:</strong> At Zecado, our mission is simple yet profound: to create scents that exude nostalgia, confidence, and simplicity. We believe a fragrance should be more than an accessory; it should be an extension of who you are. Our vision is to make Zecado a rare and essential part of life, a must-have for everyone who seeks depth in their personal scent. With each fragrance, we’re committed to creating something meaningful, luxurious, and entirely unique—each telling its own story, just as we each have our own.
+  </p>
+</div>
+
             </p>
             {/* <p>
               
