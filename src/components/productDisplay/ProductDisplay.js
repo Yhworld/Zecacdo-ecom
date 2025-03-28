@@ -15,6 +15,7 @@ import SimilarProducts from "../similar/SimilarProducts";
 
 const ProductDisplay = (props) => {
   const { product } = props;
+  console.log(product);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
