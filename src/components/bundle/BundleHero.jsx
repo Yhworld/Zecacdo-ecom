@@ -1,121 +1,62 @@
 import React from "react";
 import "./bundle.css";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { processImageUrl } from "../../utils/Timeout";
+
+// ✅ Fallback/default image (make sure this exists in your public folder)
+const DEFAULT_IMAGE = "../../public/default.jpg";
 
 function BundleHero() {
+  const { homepage, loading, error } = useSelector((state) => state.homepage);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p className="text-red-500">Error: {JSON.stringify(error)}</p>;
+
+  const homepageData = homepage?.[0] || {};
+
+  // ✅ Ensure fallback image if URL is empty/null/invalid
+  const backgroundImageBlack =
+    processImageUrl(homepageData.imageUrl)?.trim() || DEFAULT_IMAGE;
+
+  const backgroundImageWhite =
+    processImageUrl(homepageData.imageUrl1)?.trim() || DEFAULT_IMAGE;
+
+  const title = homepageData.title || "NEW BUNDLE COLLECTION";
+  const description = homepageData.description || "Explore our exclusive bundles.";
+
   return (
-    // <div className="relative mb-28 mt-36">
-      <div className="flex flex-col md:flex-row justify-between items-center relative mb-28 mt-36">
-        <div
-          id="bundle-black"
-          className="text-white flex flex-col justify-end pl-16 pb-12 "
-        >
-          <p className="text-sm">JUST FOR YOU</p>
-          <h2 className="font-bold text-3xl pt-2">
-            NEW BUNDLE
-            <br />
-            COLLECTION
-          </h2>
-          <div className="mt-4">
-            <Link
-              to='/shop'
-              class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-white transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-transparent group"
-            >
-              {/* <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-white group-hover:h-full"></span> */}
-              <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
-                <svg
-                  class="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  ></path>
-                </svg>
-              </span>
-              <span class="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
-                <svg
-                  class="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  ></path>
-                </svg>
-              </span>
-              <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
-                Shop now
-              </span>
-            </Link>
-          </div>
-        </div>
-        <div
-          id="bundle-white"
-          className="text-white flex flex-col justify-end pl-16 pb-12"
-        >
-          <p className="text-sm">JUST FOR YOU</p>
-          <h2 className="font-bold text-3xl pt-2">
-            NEW BUNDLE
-            <br />
-            COLLECTION
-          </h2>
-          <div className="mt-4">
-            <Link
-              to='/shop'
-              class="relative inline-flex items-center justify-start py-3 pl-4 pr-12 overflow-hidden font-semibold text-white transition-all duration-150 ease-in-out rounded hover:pl-10 hover:pr-6 bg-transparent group"
-            >
-              {/* <span class="absolute bottom-0 left-0 w-full h-1 transition-all duration-150 ease-in-out bg-white group-hover:h-full"></span> */}
-              <span class="absolute right-0 pr-4 duration-200 ease-out group-hover:translate-x-12">
-                <svg
-                  class="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  ></path>
-                </svg>
-              </span>
-              <span class="absolute left-0 pl-2.5 -translate-x-12 group-hover:translate-x-0 ease-out duration-200">
-                <svg
-                  class="w-5 h-5 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  ></path>
-                </svg>
-              </span>
-              <span class="relative w-full text-left transition-colors duration-200 ease-in-out group-hover:text-white">
-                Shop now
-              </span>
-            </Link>
-          </div>
+    <div className="flex flex-col md:flex-row justify-between items-center relative mb-28 mt-36">
+      {/* Black Bundle */}
+      <div
+        className="text-white flex flex-col justify-end pl-16 pb-12 bundle-section"
+        style={{
+          backgroundImage: `linear-gradient(rgba(12, 12, 12, 0.6), rgb(12, 12, 12)), url(${backgroundImageBlack})`,
+        }}
+      >
+        <p className="text-sm">JUST FOR YOU</p>
+        <h2 className="font-bold text-3xl pt-2">{title}</h2>
+        <p className="text-sm">{description}</p>
+        <div className="mt-4">
+          <Link to="/shop" className="shop-button">Shop now</Link>
         </div>
       </div>
-    // </div>
+
+      {/* White Bundle */}
+      <div
+        className="text-white flex flex-col justify-end pl-16 pb-12 bundle-section"
+        style={{
+          backgroundImage: `linear-gradient(rgba(12, 12, 12, 0.6), rgb(12, 12, 12)), url(${backgroundImageWhite})`,
+        }}
+      >
+        <p className="text-sm">JUST FOR YOU</p>
+        <h2 className="font-bold text-3xl pt-2">{title}</h2>
+        <p className="text-sm">{description}</p>
+        <div className="mt-4">
+          <Link to="/shop" className="shop-button">Shop now</Link>
+        </div>
+      </div>
+    </div>
   );
 }
 

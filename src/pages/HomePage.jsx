@@ -8,8 +8,8 @@ import 'aos/dist/aos.css';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchHomepage } from "../slices/homepageSlice"; 
 
-
-function HomePage() {
+function HomePage()
+ {
   const dispatch = useDispatch();
   const { homepage, loading, error } = useSelector((state) => state.homepage);
 
@@ -49,6 +49,8 @@ function HomePage() {
     </div>
     
   );
+
+
 }
 
 export default HomePage;

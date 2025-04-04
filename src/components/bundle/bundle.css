@@ -25,3 +25,11 @@
 #bundle-white:hover {
     background-image: linear-gradient(rgba(12, 12, 12, 0.234) 21.84%, rgba(12, 12, 12, 0.251) 71.03%),url('../../../public/WhatsApp\ Image\ 2024-09-17\ at\ 17.34.56.webp');
 }
+.bundle-section {
+    width: 100%;
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  
