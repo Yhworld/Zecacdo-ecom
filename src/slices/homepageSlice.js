@@ -14,11 +14,11 @@ const processImageUrl = (url) => {
 export const fetchHomepage = createAsyncThunk(
   "homepage/fetchHomepage",
   async (_, { rejectWithValue }) => {
-    
+
     try {
       const response = await withTimeout(
         axios.get(
-          `${process.env.REACT_APP_API_BASE_URL}rest/entities/Homepage?fetchPlan=homepage-fetch-plan`
+          `${process.env.REACT_APP_API_BASE_URL}rest/entities/Homepage?fetchPlan=homepage-fetch-plan&sort=id`
         ),
         10000
       );
