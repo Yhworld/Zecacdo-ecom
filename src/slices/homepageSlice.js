@@ -10,33 +10,31 @@ const processImageUrl = (url) => {
   return url || ""; // Ensure it returns a valid string
 };
 
+
 export const fetchHomepage = createAsyncThunk(
   "homepage/fetchHomepage",
   async (_, { rejectWithValue }) => {
+    
     try {
-      console.log("Fetching homepage data...");
       const response = await withTimeout(
         axios.get(
           `${process.env.REACT_APP_API_BASE_URL}rest/entities/Homepage?fetchPlan=homepage-fetch-plan`
         ),
-        10000 // 10-second timeout
+        10000
       );
 
-      console.log("Homepage API Response:", response.data);
+      const processedData = response.data.map((item) => ({
+        ...item,
+        imageUrl: processImageUrl(item.imageUrl),
+      }));
 
-      return {
-        ...response.data,
-        imageUrl: processImageUrl(response.data.imageUrl),
-      };
+      return processedData;
     } catch (error) {
-      console.error(
-        "Error fetching homepage:",
-        error?.response || error.message
-      );
       return rejectWithValue(error?.response?.data || "Unknown error occurred");
     }
   }
 );
+
 
 const initialState = {
   homepage: null,

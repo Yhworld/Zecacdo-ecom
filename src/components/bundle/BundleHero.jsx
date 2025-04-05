@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { processImageUrl } from "../../utils/Timeout";
 
-// ✅ Fallback/default image (make sure this exists in your public folder)
+
+
 const DEFAULT_IMAGE = "../../public/default.jpg";
 
 function BundleHero() {
@@ -13,20 +14,17 @@ function BundleHero() {
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">Error: {JSON.stringify(error)}</p>;
 
-  const homepageData = homepage?.[0] || {};
+  const bundle1 = homepage?.[0] || {};
+  const bundle2 = homepage?.[1] || {};
 
-  // ✅ Ensure fallback image if URL is empty/null/invalid
-  const backgroundImageBlack =
-    processImageUrl(homepageData.imageUrl)?.trim() || DEFAULT_IMAGE;
+  const DEFAULT_IMAGE = "/default.jpg";
 
-  const backgroundImageWhite =
-    processImageUrl(homepageData.imageUrl1)?.trim() || DEFAULT_IMAGE;
-
-  const title = homepageData.title || "NEW BUNDLE COLLECTION";
-  const description = homepageData.description || "Explore our exclusive bundles.";
+  const backgroundImageBlack = processImageUrl(bundle1.imageUrl)?.trim() || DEFAULT_IMAGE;
+  const backgroundImageWhite = processImageUrl(bundle2.imageUrl)?.trim() || DEFAULT_IMAGE;
 
   return (
     <div className="flex flex-col md:flex-row justify-between items-center relative mb-28 mt-36">
+
       {/* Black Bundle */}
       <div
         className="text-white flex flex-col justify-end pl-16 pb-12 bundle-section"
@@ -34,11 +32,11 @@ function BundleHero() {
           backgroundImage: `linear-gradient(rgba(12, 12, 12, 0.6), rgb(12, 12, 12)), url(${backgroundImageBlack})`,
         }}
       >
-        <p className="text-sm">JUST FOR YOU</p>
-        <h2 className="font-bold text-3xl pt-2">{title}</h2>
-        <p className="text-sm">{description}</p>
+        <p className="text-sm">{bundle1.highlightLabel || "JUST FOR YOU"}</p>
+        <h2 className="font-bold text-3xl pt-2">{bundle1.title || "NEW BUNDLE COLLECTION"}</h2>
+        <p className="text-sm">{bundle1.description || "Explore our exclusive bundles."}</p>
         <div className="mt-4">
-          <Link to="/shop" className="shop-button">Shop now</Link>
+          <Link to="/shop" className="shop-button">{bundle1.buttonText || "Shop now"}</Link>
         </div>
       </div>
 
@@ -49,13 +47,14 @@ function BundleHero() {
           backgroundImage: `linear-gradient(rgba(12, 12, 12, 0.6), rgb(12, 12, 12)), url(${backgroundImageWhite})`,
         }}
       >
-        <p className="text-sm">JUST FOR YOU</p>
-        <h2 className="font-bold text-3xl pt-2">{title}</h2>
-        <p className="text-sm">{description}</p>
+        <p className="text-sm">{bundle2.highlightLabel || "JUST FOR YOU"}</p>
+        <h2 className="font-bold text-3xl pt-2">{bundle2.title || "NEW BUNDLE COLLECTION"}</h2>
+        <p className="text-sm">{bundle2.description || "Explore our exclusive bundles."}</p>
         <div className="mt-4">
-          <Link to="/shop" className="shop-button">Shop now</Link>
+          <Link to="/shop" className="shop-button">{bundle2.buttonText || "Shop now"}</Link>
         </div>
       </div>
+
     </div>
   );
 }
