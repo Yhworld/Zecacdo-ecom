@@ -37,7 +37,7 @@ export const fetchHomepage = createAsyncThunk(
 
 
 const initialState = {
-  homepage: null,
+  homepage: [],
   loading: false,
   error: null,
 };
@@ -62,7 +62,7 @@ const homepageSlice = createSlice({
         console.error("Homepage fetch failed:", action.payload);
         state.loading = false;
         state.error = action.payload;
-        state.homepage = null; // Ensure previous data is cleared on failure
+        state.homepage = []; // ✅ Reset to empty array instead of null
       });
   },
 });

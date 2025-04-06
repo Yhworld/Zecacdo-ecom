@@ -13,9 +13,11 @@ function BundleHero() {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p className="text-red-500">Error: {JSON.stringify(error)}</p>;
+  const divSections = homepage?.filter(item => item.sectionType === "div") || [];
 
-  const bundle1 = homepage?.[0] || {};
-  const bundle2 = homepage?.[1] || {};
+ // ✅ Use first two divs as bundles
+ const bundle1 = divSections[0] || {};
+ const bundle2 = divSections[1] || {};
 
   const DEFAULT_IMAGE = "/default.jpg";
 
@@ -36,7 +38,7 @@ function BundleHero() {
         <h2 className="font-bold text-3xl pt-2">{bundle1.title || "NEW BUNDLE COLLECTION"}</h2>
         <p className="text-sm">{bundle1.description || "Explore our exclusive bundles."}</p>
         <div className="mt-4">
-          <Link to="/shop" className="shop-button">{bundle1.buttonText || "Shop now"}</Link>
+          <Link to={bundle1?.buttonLink || "/shop"} className="shop-button">{bundle1.buttonText || "Shop now"}</Link>
         </div>
       </div>
 
@@ -51,7 +53,7 @@ function BundleHero() {
         <h2 className="font-bold text-3xl pt-2">{bundle2.title || "NEW BUNDLE COLLECTION"}</h2>
         <p className="text-sm">{bundle2.description || "Explore our exclusive bundles."}</p>
         <div className="mt-4">
-          <Link to="/shop" className="shop-button">{bundle2.buttonText || "Shop now"}</Link>
+          <Link to={bundle2?.buttonLink || "/shop"} className="shop-button">{bundle2.buttonText || "Shop now"}</Link>
         </div>
       </div>
 
