@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import './hero.css'
+import { useSelector } from "react-redux";
+
+import { processImageUrl } from "../../utils/Timeout"; // Make sure this is imported
 
 
 function Hero() {
   const [current, setCurrent] = useState(0);
   
-  const imagePaths = ['/image2.webp', '/image3.webp', '/image4.webp']
-  
+  const { homepage } = useSelector((state) => state.homepage);
+  const imagePaths = homepage?.filter(item => item.sectionType === "slider") || [];
+
 
   // const previousSlide = () => {
   //   const newIndex = (current === 0) ? (imagePaths.length - 1) : (current - 1);
@@ -23,48 +27,52 @@ function Hero() {
     return () => clearInterval(intervalId); // Cleanup the interval
   },); // Re-run effect when current changes
 
-  return (
 
-      <div
-        className={`flex transition ease-out duration-40 overflow-hidden`}
-        id="emotions"
-        style={{
-          backgroundImage: `linear-gradient(rgba(12, 12, 12, 0.4) 21.84%, rgba(12, 12, 12, 0.1) 71.03%), url(${process.env.PUBLIC_URL + imagePaths[current]})`
-        }}
-      >
-  <div id="hero-container" className="max-w-screen-xl flex flex-col mx-auto container text-white pt-48 pl-10 p-8">
-    <div className="hidden md:block">
-      SCENTS THAT COMMAND ATTENTION
-    </div>
-    <Link to='/shop' className="md:hidden leading-normal flex justify-center text-2xl font-semibold text-center">Timeless Fragrances for Every Occasion</Link>
-    <br/>
-    <div id="hero-text" className="hidden md:block md:text-5xl text-2xl">
-      <p>CRAFTING FOR THE DISCERNING</p>
-      <p>TIMELESS FRAGRANCES</p>
-      <p>FOR EVERY OCCASION</p>
-    </div>
-    <div className="cta-btn">
-    <div className="flex justify-center">
-    <Link to="/shop" id="hero-shop" className="mb-6 md:hidden bg-transparent border-white border-2 rounded-3xl text-white md:hover:bg-gray-200 xs:w-full">Shop scents</Link> 
-   </div> 
-   <div className="flex ">
-    <Link to='/shop' id="hero-link" className="hidden md:block mb-6 bg-white border-2 rounded-md text-black md:hover:bg-gray-200">Shop scents</Link> 
-   </div> 
-    </div>
-    <div id="tudot" className="py-12 flex items-end justify-center gap-3 w-full">
-        {imagePaths.map((imagePath, i) => (
-          <div
-            onClick={() => {
-              setCurrent(i);
-            }}
-            key={"circle" + i}
-            className={`rounded-full w-3 h-3 cursor-pointer  ${
-              i === current ? "bg-white" : "bg-gray-500"
-            }`}
-          ></div>
-        ))}
+  if (imagePaths.length === 0) return null;
+
+  const currentSlide = imagePaths[current];
+  const backgroundImage = processImageUrl(currentSlide.imageUrl)?.trim() || "/default.jpg";
+
+
+  return (
+    <div
+      className={`flex transition ease-out duration-40 overflow-hidden`}
+      id="emotions"
+      style={{
+        backgroundImage: `linear-gradient(rgba(12, 12, 12, 0.4) 21.84%, rgba(12, 12, 12, 0.1) 71.03%), url(${backgroundImage})`
+      }}
+    >
+      <div id="hero-container" className="max-w-screen-xl flex flex-col mx-auto container text-white pt-48 pl-10 p-8">
+        <div className="hidden md:block">{currentSlide?.highlightLabel || "SCENTS THAT COMMAND ATTENTION"}</div>
+        <Link to='/shop' className="md:hidden leading-normal flex justify-center text-2xl font-semibold text-center">
+          {currentSlide?.description || "Timeless Fragrances for Every Occasion"}
+        </Link>
+        <br />
+        <div id="hero-text" className="hidden md:block md:text-5xl text-2xl">
+          <p>{currentSlide?.title || "TIMELESS FRAGRANCES"}</p>
+        </div>
+        <div className="cta-btn">
+          <div className="flex justify-center">
+            <Link to={currentSlide?.buttonLink || "/shop"} id="hero-shop" className="mb-6 md:hidden bg-transparent border-white border-2 rounded-3xl text-white md:hover:bg-gray-200 xs:w-full">
+              {currentSlide?.buttonText || "Shop scents"}
+            </Link>
+          </div>
+          <div className="flex">
+            <Link to={currentSlide?.buttonLink || "/shop"} id="hero-link" className="hidden md:block mb-6 bg-white border-2 rounded-md text-black md:hover:bg-gray-200">
+              {currentSlide?.buttonText || "Shop scents"}
+            </Link>
+          </div>
+        </div>
+        <div id="tudot" className="py-12 flex items-end justify-center gap-3 w-full">
+          {imagePaths.map((_, i) => (
+            <div
+              onClick={() => setCurrent(i)}
+              key={"circle" + i}
+              className={`rounded-full w-3 h-3 cursor-pointer ${i === current ? "bg-white" : "bg-gray-500"}`}
+            ></div>
+          ))}
+        </div>
       </div>
-  </div>
     </div>
   );
 }
