@@ -43,22 +43,22 @@ function Hero() {
       }}
     >
       <div id="hero-container" className="max-w-screen-xl flex flex-col mx-auto container text-white pt-48 pl-10 p-8">
-        <div className="hidden md:block">{currentSlide?.highlightLabel || "SCENTS THAT COMMAND ATTENTION"}</div>
+        <div className="hidden md:block">{currentSlide?.title || "SCENTS THAT COMMAND ATTENTION"}</div>
         <Link to='/shop' className="md:hidden leading-normal flex justify-center text-2xl font-semibold text-center">
-          {currentSlide?.description || "Timeless Fragrances for Every Occasion"}
+          {currentSlide?.title }
         </Link>
         <br />
         <div id="hero-text" className="hidden md:block md:text-5xl text-2xl">
-          <p>{currentSlide?.title || "TIMELESS FRAGRANCES"}</p>
+          <p>{currentSlide?.description || "TIMELESS FRAGRANCES"}</p>
         </div>
         <div className="cta-btn">
           <div className="flex justify-center">
-            <Link to={currentSlide?.buttonLink || "/shop"} id="hero-shop" className="mb-6 md:hidden bg-transparent border-white border-2 rounded-3xl text-white md:hover:bg-gray-200 xs:w-full">
+            <Link to='/shop' id="hero-shop" className="mb-6 md:hidden bg-transparent border-white border-2 rounded-3xl text-white md:hover:bg-gray-200 xs:w-full">
               {currentSlide?.buttonText || "Shop scents"}
             </Link>
           </div>
           <div className="flex">
-            <Link to={currentSlide?.buttonLink || "/shop"} id="hero-link" className="hidden md:block mb-6 bg-white border-2 rounded-md text-black md:hover:bg-gray-200">
+            <Link to='/shop' id="hero-link" className="hidden md:block mb-6 bg-white border-2 rounded-md text-black md:hover:bg-gray-200">
               {currentSlide?.buttonText || "Shop scents"}
             </Link>
           </div>

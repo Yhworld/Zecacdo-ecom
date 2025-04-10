@@ -3,12 +3,16 @@ import axios from 'axios';
 import { withTimeout } from '../utils/Timeout'; // Adjust the path as needed
 
 const processImageUrl = (url) => {
+  if (!url) return ''; // or return a placeholder image URL like '/default.jpg'
+  
   if (url.startsWith('s3://')) {
     const encodedFilePath = encodeURIComponent(url.substring(5));
     return `${process.env.REACT_APP_API_BASE_URL}rest/files?fileRef=s3%3A%2F%2F${encodedFilePath}`;
   }
+
   return url;
 };
+
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
   const response = await withTimeout(

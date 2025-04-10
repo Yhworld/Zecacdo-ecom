@@ -18,6 +18,7 @@ function Shop() {
   useEffect(() => {
     if (!loading && products.length === 0) {
       dispatch(fetchProducts());
+
     }
   }, [loading, products.length, dispatch]);
 

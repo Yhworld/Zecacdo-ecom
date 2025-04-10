@@ -38,7 +38,7 @@ function BundleHero() {
         <h2 className="font-bold text-3xl pt-2">{bundle1.title || "NEW BUNDLE COLLECTION"}</h2>
         <p className="text-sm">{bundle1.description || "Explore our exclusive bundles."}</p>
         <div className="mt-4">
-          <Link to={bundle1?.buttonLink || "/shop"} className="shop-button">{bundle1.buttonText || "Shop now"}</Link>
+          <Link to='/shop' className="shop-button">{bundle1.buttonText || "Shop now"}</Link>
         </div>
       </div>
 
@@ -53,7 +53,7 @@ function BundleHero() {
         <h2 className="font-bold text-3xl pt-2">{bundle2.title || "NEW BUNDLE COLLECTION"}</h2>
         <p className="text-sm">{bundle2.description || "Explore our exclusive bundles."}</p>
         <div className="mt-4">
-          <Link to={bundle2?.buttonLink || "/shop"} className="shop-button">{bundle2.buttonText || "Shop now"}</Link>
+          <Link to='/shop' className="shop-button">{bundle2.buttonText || "Shop now"}</Link>
         </div>
       </div>
 

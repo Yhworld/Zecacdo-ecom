@@ -25,7 +25,7 @@ function Cta() {
           {ctaData.title || "Explore Zecado's unique fragrances. Your journey to self-discovery starts here."}
         </h2>
         <Link
-          to={ctaData?.buttonLink || "/shop"}
+          to='/shop'
           className="mt-8 rounded-2xl text-black bg-white hover:bg-brown hover:border-white hover:text-white focus:ring-4 focus:ring-primary-300 font-medium text-sm px-12 py-3.5 mr-2 mb-2  focus:outline-none"
         >
           {ctaData.buttonText || "Shop"}
