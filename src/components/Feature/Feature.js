@@ -31,14 +31,16 @@ function Feature() {
       ) : error ? (
         <div className="text-center text-red-500">Failed to load products: {error}</div>
       ) : (
-        <div className="flex flex-col md:flex-row justify-between md:items-center">
-          {products.map(product => (
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8">
+{products.map(product => (
             <Item
               key={product.id}
               id={product.id}
               image={product.imageUrl}  // Ensure imageUrl is passed correctly
               name={product.name}       // Ensure name is passed correctly
-              price={product.price}     // Ensure price is passed correctly
+              price={product.price} 
+              className="w-full h-64 object-cover rounded shadow"
+              // Ensure price is passed correctly
             />
           ))}
         </div>
