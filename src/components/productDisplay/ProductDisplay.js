@@ -131,13 +131,24 @@ const ProductDisplay = (props) => {
     },
   ];
 
+  const galleryImages = [
+    product.image1,
+    product.image2,
+    product.image3,
+    product.imageUrl, // fallback / default
+  ].filter(Boolean) // remove null/undefined
+    .map((img) => ({
+      original: img,
+      thumbnail: img,
+    }));
+
   return (
     <div className="max-w-screen-xl mx-auto container">
       <div className="mt-12 flex p-4 flex-col md:flex-row justify-between">
         <div className="flex flex-col items-center md:w-2/5">
           <ImageGallery
-            items={images}
-            showPlayButton={false}
+  items={galleryImages}
+  showPlayButton={false}
             showFullscreenButton={false}
             showNav={false}
           />
