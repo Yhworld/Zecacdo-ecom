@@ -5,7 +5,11 @@ import { useSelector } from "react-redux";
 
 function Cta() {
   const homepage = useSelector((state) => state.homepage.homepage || []);
-  const ctaData = homepage[2] || {};
+
+
+  
+  // ⛳ Filter for cta type section
+  const ctaData = homepage.find(item => item.sectionType === "cta") || {};
 
   return (
     <section

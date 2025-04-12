@@ -11,7 +11,7 @@ function Hero() {
   
   const { homepage } = useSelector((state) => state.homepage);
   const imagePaths = homepage?.filter(item => item.sectionType === "slider") || [];
-
+console.log("sacdasdc",homepage);
 
   // const previousSlide = () => {
   //   const newIndex = (current === 0) ? (imagePaths.length - 1) : (current - 1);
