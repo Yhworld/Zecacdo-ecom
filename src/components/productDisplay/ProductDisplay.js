@@ -131,16 +131,20 @@ const ProductDisplay = (props) => {
     },
   ];
 
-  const galleryImages = [
-    product.image1,
-    product.image2,
-    product.image3,
-    product.imageUrl, // fallback / default
-  ].filter(Boolean) // remove null/undefined
-    .map((img) => ({
-      original: img,
-      thumbnail: img,
+
+
+    const allImages = [
+      product.imageUrl,
+      product.image1,
+      product.image2,
+      product.image3,
+    ].filter(Boolean); // removes null/undefined
+    
+    const galleryImages = allImages.map((img) => ({
+      original: processImageUrl(img),
+      thumbnail: processImageUrl(img),
     }));
+    
 
   return (
     <div className="max-w-screen-xl mx-auto container">
