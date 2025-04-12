@@ -11,6 +11,8 @@ import { PiHeartThin, PiHeartFill } from "react-icons/pi";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import "./productdisplay.css";
+import { processImageUrl } from "../../utils/Timeout"; // ✅ Adjust the path if needed
+
 import SimilarProducts from "../similar/SimilarProducts";
 
 const ProductDisplay = (props) => {
@@ -131,31 +133,35 @@ const ProductDisplay = (props) => {
     },
   ];
 
+  const allImages = [
+    product.imageUrl,
+    product.image1,
+    product.image2,
+    product.image3,
+  ].filter(Boolean); // removes null/undefined
+  
+  const galleryImages = allImages.map((img) => ({
+    original: processImageUrl(img),
+    thumbnail: processImageUrl(img),
+  }));
+  
 
-
-    const allImages = [
-      product.imageUrl,
-      product.image1,
-      product.image2,
-      product.image3,
-    ].filter(Boolean); // removes null/undefined
-    
-    const galleryImages = allImages.map((img) => ({
-      original: processImageUrl(img),
-      thumbnail: processImageUrl(img),
-    }));
     
 
   return (
     <div className="max-w-screen-xl mx-auto container">
       <div className="mt-12 flex p-4 flex-col md:flex-row justify-between">
         <div className="flex flex-col items-center md:w-2/5">
-          <ImageGallery
+  
+
+
+<ImageGallery
   items={galleryImages}
   showPlayButton={false}
-            showFullscreenButton={false}
-            showNav={false}
-          />
+  showFullscreenButton={false}
+  showNav={false}
+/>
+
         </div>
         <div id="product-listing" className="space-y-6 p-6 md:pr-12 md:w-1/2">
           <div className="flex pt-8 md:pt-0 justify-between items-center space-x-20">
