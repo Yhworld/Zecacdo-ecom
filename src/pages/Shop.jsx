@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts } from '../slices/ProductSlice';
-import ShopBg from '../components/shopBg/ShopBg';
+// import ShopBg from '../components/shopBg/ShopBg';
 import ShopFilter from '../components/shopFilter/ShopFilter';
 import ContentLoader from 'react-content-loader'; // Import react-content-loader
 import Breadcrumb from '../components/breadcrumbs/Breadcrumb';
@@ -69,7 +69,7 @@ function Shop() {
 
   return (
     <>
-      <ShopBg />
+      {/* <ShopBg /> */}
       <Breadcrumb pathMapping={pathMapping} />
       <ShopFilter />
     </>
