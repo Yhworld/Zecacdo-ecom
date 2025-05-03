@@ -33,7 +33,7 @@ function ContactPage() {
 
   return (
     <>
-      <section className="bg-white" id="contact">
+      <section className="bg-peach" id="contact">
         <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
           {showSuccessAlert && (
             <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">

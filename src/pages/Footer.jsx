@@ -20,7 +20,6 @@ function Footer() {
       .then(
         () => {
           setLoading(false);  // Stop loading once the email is sent
-          console.log("SUCCESS!");
           setShowSuccessAlert(true);
           form.current.reset();
           setTimeout(() => {
@@ -29,13 +28,12 @@ function Footer() {
         },
         (error) => {
           setLoading(false);  // Stop loading if the email sending fails
-          console.log("FAILED...", error.text);
         }
       );
   };
 
   return (
-    <footer className="bg-white mt-32 bottom-0 p-4 pl-6">
+    <footer className="bg-peach mt-32 bottom-0 p-4 pl-6">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <NavLink to="/">
           <Logo id="logo" fill="#65371F" />

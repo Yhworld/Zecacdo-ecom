@@ -17,7 +17,6 @@ function HomePage()
 
   useEffect(() => {
     
-  console.log("Dispatching fetchHomepage...");
   dispatch(fetchHomepage());
     AOS.init({ duration: 1200 });
     const handleZoomChange = () => {

@@ -11,7 +11,7 @@ function Hero() {
   
   const { homepage } = useSelector((state) => state.homepage);
   const imagePaths = homepage?.filter(item => item.sectionType === "slider") || [];
-console.log("sacdasdc",homepage);
+
 
   // const previousSlide = () => {
   //   const newIndex = (current === 0) ? (imagePaths.length - 1) : (current - 1);
@@ -42,7 +42,7 @@ console.log("sacdasdc",homepage);
         backgroundImage: `linear-gradient(rgba(12, 12, 12, 0.4) 21.84%, rgba(12, 12, 12, 0.1) 71.03%), url(${backgroundImage})`
       }}
     >
-      <div id="hero-container" className="max-w-screen-xl flex flex-col mx-auto container text-white pt-48 pl-10 p-8">
+      {/* <div id="hero-container" className="max-w-screen-xl flex flex-col mx-auto container text-white pt-48 pl-10 p-8">
         <div className="hidden md:block">{currentSlide?.title || "SCENTS THAT COMMAND ATTENTION"}</div>
         <Link to='/shop' className="md:hidden leading-normal flex justify-center text-2xl font-semibold text-center">
           {currentSlide?.title }
@@ -72,7 +72,7 @@ console.log("sacdasdc",homepage);
             ></div>
           ))}
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

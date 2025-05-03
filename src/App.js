@@ -28,7 +28,7 @@ const NotFound = lazy(() => import('./pages/404/NotFound'));
 
 function App() {
   return (
-    <div className="app-container">  
+    <div className="bg-peach app-container">  
       <Navbar />
       <ScrollToTop />
       <Suspense fallback={<Spinner />}>
