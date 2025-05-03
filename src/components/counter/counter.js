@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import banner from '../../assets/ED47A4B5-9EB7-42E3-B5EF-5218BBCD1729.png';
+import banner from '../../assets/5FE1B93B-5829-433B-B8D7-AE4C6EA4D42B.PNG';
 
 const CountdownBanner = () => {
   const [timeLeft, setTimeLeft] = useState({});
   const [expired, setExpired] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   const calculateTimeLeft = () => {
-    const target = new Date('2025-05-03T12:00:00-04:00'); // May 3, 12PM ET
+    const target = new Date('2025-05-03T12:00:00-04:00');
     const now = new Date();
     const diff = target - now;
 
@@ -27,34 +28,32 @@ const CountdownBanner = () => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
+
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const bannerStyle = {
+    backgroundImage: `url(${banner})`,
+    backgroundSize: 'cover', // switched from 100% 100% to avoid squish
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    width: '100%',
+    height: isMobile ? '65vw' : '500px',
+    minHeight: '250px',
+  };
+
   return (
-<div
-  className="w-full bg-cover bg-center py-10 px-6 mt-24 flex flex-col items-center justify-center text-black animate-fadeIn"
-  style={{ backgroundImage: `url(${banner})`, height:'300px', }}
->
-
-<h1 className="text-black text-2xl sm:text-3xl font-semibold tracking-wide mb-2">
-        MAY 3, 12:00 PM
-      </h1>
-
-      {!expired ? (
-        <div className="text-black text-4xl sm:text-5xl font-bold flex gap-4">
-          <span>{String(timeLeft.days).padStart(2, '0')}d</span>
-          <span>{String(timeLeft.hours).padStart(2, '0')}h</span>
-          <span>{String(timeLeft.minutes).padStart(2, '0')}m</span>
-          <span>{String(timeLeft.seconds).padStart(2, '0')}s</span>
-        </div>
-      ) : (
-        <p className="text-black text-2xl font-bold mt-4">Pre-Launch sale Sweet Petricor</p>
-      )}
-
-      <p className="mt-4 text-sm tracking-wider uppercase text-black">
-
-      </p>
-      {/* fragrence of love */}
+    <div
+      className="w-full mt-24 flex flex-col items-center justify-center text-black animate-fadeIn"
+      style={bannerStyle}
+    >
+      {/* Optional: Add content like countdown text here */}
     </div>
   );
 };
