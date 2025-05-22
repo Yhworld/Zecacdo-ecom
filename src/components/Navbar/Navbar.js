@@ -171,7 +171,7 @@ function Navbar() {
       </div>
 
       <div className="w-full text-white text-center py-2">
-        <CountdownBanner />
+        {/* <CountdownBanner /> */}
       </div>
     </>
   );
